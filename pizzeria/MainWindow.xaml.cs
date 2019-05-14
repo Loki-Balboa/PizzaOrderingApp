@@ -1,42 +1,31 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Pizzeria
 {
-    class Admin
-    {
-        private void AddIngredient()
-        {
-
-        }
-    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Basket basket = new Basket();
+        public Menu menu = new Menu();
+        //public Ingredient ingrediens = new Ingredient();
+
         public MainWindow()
         {
             InitializeComponent();
+            basket.ItemsInBasket.Add(menu.Pizzas[0]);
+            basket.ItemsInBasket.Add(menu.Pizzas[1]);
+            Basket.ItemsSource = basket.ItemsInBasket;
+            MenuPositions.ItemsSource = menu.Pizzas;
         }
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
         {
-            //var myPizza = new Pizza();
-            //{
-            //    Name = "Własna Pizza"
-            //};
+            var myPizza = new Pizza("Custom Pizza", new List<Ingredient> { menu.Ingredients[0], menu.Ingredients[1] });
+            basket.ItemsInBasket.Add(myPizza);
+            Basket.ItemsSource = basket.ItemsInBasket;
         }
     }
 }
