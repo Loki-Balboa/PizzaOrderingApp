@@ -12,7 +12,7 @@ namespace Pizzeria
         public Pizza(string name, List<Ingredient> ingredients)
         {
             Name = name;
-            Ingredients = new List<Ingredient>();
+            this.Ingredients = ingredients;
             Prize = 0;
             foreach (var ingredient in Ingredients)
             {

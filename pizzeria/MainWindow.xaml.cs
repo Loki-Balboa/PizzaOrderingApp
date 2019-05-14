@@ -15,17 +15,16 @@ namespace Pizzeria
         public MainWindow()
         {
             InitializeComponent();
-            basket.ItemsInBasket.Add(menu.Pizzas[0]);
-            basket.ItemsInBasket.Add(menu.Pizzas[1]);
-            Basket.ItemsSource = basket.ItemsInBasket;
-            MenuPositions.ItemsSource = menu.Pizzas;
+            MenuPositions.ItemsSource = menu.Pizzas;            
         }
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
         {
             var myPizza = new Pizza("Custom Pizza", new List<Ingredient> { menu.Ingredients[0], menu.Ingredients[1] });
             basket.ItemsInBasket.Add(myPizza);
-            Basket.ItemsSource = basket.ItemsInBasket;
+            Basket.Items.Add(myPizza);
+
+            //Basket.ItemsSource = basket.ItemsInBasket;
         }
     }
 }
