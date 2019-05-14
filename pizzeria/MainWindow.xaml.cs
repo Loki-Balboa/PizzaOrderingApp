@@ -10,11 +10,13 @@ namespace Pizzeria
     {
         public Basket basket = new Basket();
         public Menu menu = new Menu();
-        //public Ingredient ingrediens = new Ingredient();
+        private CreatePizzaWindow pizzaWindow;
 
         public MainWindow()
         {
             InitializeComponent();
+            pizzaWindow = new CreatePizzaWindow();
+            pizzaWindow.Hide();
             MenuPositions.ItemsSource = menu.Pizzas;            
         }
 
@@ -23,7 +25,7 @@ namespace Pizzeria
             var myPizza = new Pizza("Custom Pizza", new List<Ingredient> { menu.Ingredients[0], menu.Ingredients[1] });
             basket.ItemsInBasket.Add(myPizza);
             Basket.Items.Add(myPizza);
-
+            pizzaWindow.Show();
             //Basket.ItemsSource = basket.ItemsInBasket;
         }
     }
