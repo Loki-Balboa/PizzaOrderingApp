@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Pizzeria
 {
@@ -20,9 +8,12 @@ namespace Pizzeria
     /// </summary>
     public partial class CreatePizzaWindow : Window
     {
+        public Menu menu = new Menu();
+
         public CreatePizzaWindow()
         {
             InitializeComponent();
+            IngredientsList.ItemsSource = menu.Ingredients;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
