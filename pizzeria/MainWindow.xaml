@@ -44,7 +44,7 @@
         </StackPanel>
         <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="5" Width="120">
             <TextBlock Text="Basket"/>
-            <ListView x:Name="Basket">
+            <ListView x:Name="BasketList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

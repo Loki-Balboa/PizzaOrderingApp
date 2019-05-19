@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace Pizzeria
 {
@@ -9,6 +10,7 @@ namespace Pizzeria
     public partial class CreatePizzaWindow : Window
     {
         public Menu menu = new Menu();
+        public Pizza customPizza = new Pizza("Custom Pizza", new List<Ingredient>()); 
 
         public CreatePizzaWindow()
         {
@@ -16,13 +18,25 @@ namespace Pizzeria
             IngredientsList.ItemsSource = menu.Ingredients;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
             Hide();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            customPizza.Ingredients.Add((Ingredient)IngredientsList.SelectedItem);
+            SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void CreatePizzaButton_Click(object sender, RoutedEventArgs e)
+        {
+            
             Hide();
         }
     }

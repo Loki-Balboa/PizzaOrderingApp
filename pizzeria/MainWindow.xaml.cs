@@ -22,11 +22,13 @@ namespace Pizzeria
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
         {
-            var myPizza = new Pizza("Custom Pizza", new List<Ingredient> { menu.Ingredients[0], menu.Ingredients[1] });
-            basket.ItemsInBasket.Add(myPizza);
-            Basket.Items.Add(myPizza);
             pizzaWindow.Show();
-            //Basket.ItemsSource = basket.ItemsInBasket;
         }
+
+        //public void AddPizzaToBasket(Pizza pizza)
+        //{
+        //    basket.ItemsInBasket.Add(pizza);
+        //    BasketList.Items.Add(pizza);
+        //}
     }
 }
