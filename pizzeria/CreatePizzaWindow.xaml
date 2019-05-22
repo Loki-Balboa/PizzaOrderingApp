@@ -23,14 +23,18 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Button x:Name="AddButton" Content="Add Ingredient" Grid.Column="1" Grid.Row="1" Click="AddButton_Click"/>
+        <Button x:Name="RemoveButton" Content="Remove Ingredient" Grid.Column="2" Grid.Row="1" Click="RemoveButton_Click"/>
         <ListView x:Name="IngredientsList" Grid.Column="1" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Prize}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.Column="2" Grid.Row="1" Width="120" Grid.RowSpan="3">
+        <StackPanel Grid.Column="2" Grid.Row="2" Width="120" Grid.RowSpan="3">
             <TextBlock Text="Selected Ingredients"/>
             <ListView x:Name="SelectedIngredientsList">
                 <ListView.ItemTemplate>

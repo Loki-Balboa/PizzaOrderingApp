@@ -29,6 +29,12 @@ namespace Pizzeria
             SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
         }
 
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            customPizza.Ingredients.Remove((Ingredient)SelectedIngredientsList.SelectedItem);
+            SelectedIngredientsList.Items.Remove(SelectedIngredientsList.SelectedItem);
+        }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Hide();

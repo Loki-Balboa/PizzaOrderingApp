@@ -17,7 +17,19 @@ namespace Pizzeria
             InitializeComponent();
             pizzaWindow = new CreatePizzaWindow();
             pizzaWindow.Hide();
-            MenuPositions.ItemsSource = menu.Pizzas;            
+            ItemsInMenu.ItemsSource = menu.Pizzas;            
+        }
+
+        private void AddToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            basket.ItemsInBasket.Add((Pizza)ItemsInMenu.SelectedItem);
+            BasketList.Items.Add(ItemsInMenu.SelectedItem);
+        }
+
+        private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
+        {
+            basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
+            BasketList.Items.Remove(BasketList.SelectedItem);
         }
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
