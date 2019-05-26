@@ -27,10 +27,16 @@
         <ListView x:Name="IngredientsList" Grid.Column="1" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Prize}"/>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Prize}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                        <TextBlock Grid.Column="2" Text="PLN"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -39,10 +45,16 @@
             <ListView x:Name="SelectedIngredientsList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Text="{Binding Prize}"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Prize}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                            <TextBlock Grid.Column="2" Text="PLN"/>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

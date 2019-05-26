@@ -13,17 +13,11 @@ namespace Pizzeria
         {
             Name = name;
             this.Ingredients = ingredients;
-            Prize = 0;
+            Prize = 15;
             foreach (var ingredient in Ingredients)
             {
                 Prize += ingredient.Prize;
             }
-        }
-        
-        public void AddIngredient()
-        {
-            //skladnik z listy Ingredients
-            //Ingredients.Add();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 
 namespace Pizzeria
@@ -12,15 +11,18 @@ namespace Pizzeria
         public Basket basket = new Basket();
         public Menu menu = new Menu();
         private CreatePizzaWindow pizzaWindow;
+        private OrderSummary orderSummary;
 
         public MainWindow()
         {
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
-
             pizzaWindow = new CreatePizzaWindow();
             pizzaWindow.Hide();
+            orderSummary = new OrderSummary();
+            orderSummary.Hide();
+
             ItemsInMenu.ItemsSource = menu.Pizzas;            
         }
 
@@ -37,13 +39,14 @@ namespace Pizzeria
         }
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
-        {
-                pizzaWindow.Show();
+        {  
+            pizzaWindow.Show();
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-
+            orderSummary.GetOrder();
+            orderSummary.Show();
         }
         
         public void GetPizza(Pizza pizza)
@@ -56,6 +59,7 @@ namespace Pizzeria
         {
             base.OnClosing(e);
             pizzaWindow.Close();
+            orderSummary.Close();
         }
     }
 }

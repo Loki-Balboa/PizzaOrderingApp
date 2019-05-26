@@ -10,7 +10,7 @@ namespace Pizzeria
     public partial class CreatePizzaWindow : Window
     {
         public Menu menu = new Menu();
-        public Pizza customPizza = new Pizza("Custom Pizza", new List<Ingredient>()); 
+        public List<Ingredient> ingredients = new List<Ingredient>();
 
         public CreatePizzaWindow()
         {
@@ -25,13 +25,13 @@ namespace Pizzeria
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            customPizza.Ingredients.Add((Ingredient)IngredientsList.SelectedItem);
+            ingredients.Add((Ingredient)IngredientsList.SelectedItem);
             SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            customPizza.Ingredients.Remove((Ingredient)SelectedIngredientsList.SelectedItem);
+            ingredients.Remove((Ingredient)SelectedIngredientsList.SelectedItem);
             SelectedIngredientsList.Items.Remove(SelectedIngredientsList.SelectedItem);
         }
 
@@ -43,8 +43,7 @@ namespace Pizzeria
         private void CreatePizzaButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.GetPizza(customPizza);
-
+            mainWindow.GetPizza(new Pizza("Custom Pizza", ingredients));
             Hide();
         }
     }
