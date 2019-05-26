@@ -18,6 +18,7 @@ namespace Pizzeria
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
+
             pizzaWindow = new CreatePizzaWindow();
             pizzaWindow.Hide();
             ItemsInMenu.ItemsSource = menu.Pizzas;            
