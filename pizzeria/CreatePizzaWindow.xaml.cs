@@ -42,12 +42,9 @@ namespace Pizzeria
 
         private void CreatePizzaButton_Click(object sender, RoutedEventArgs e)
         {
-            // 1 sposob
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.GetPizza();
+            mainWindow.GetPizza(customPizza);
 
-            // 2 sposob - metoda statyczna
-            MainWindow.Test();
             Hide();
         }
     }
