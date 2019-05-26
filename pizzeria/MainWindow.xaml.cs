@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Pizzeria
@@ -15,6 +16,8 @@ namespace Pizzeria
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
+
             pizzaWindow = new CreatePizzaWindow();
             pizzaWindow.Hide();
             ItemsInMenu.ItemsSource = menu.Pizzas;            
@@ -34,13 +37,13 @@ namespace Pizzeria
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
         {
-            pizzaWindow.Show();
+                pizzaWindow.Show();
         }
 
-        //public void AddPizzaToBasket(Pizza pizza)
-        //{
-        //    basket.ItemsInBasket.Add(pizza);
-        //    BasketList.Items.Add(pizza);
-        //}
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            pizzaWindow.Close();
+        }
     }
 }
