@@ -26,11 +26,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <!--<Button x:Name="Menu" Grid.Column="1" Grid.Row="1" Content="Menu"  Width="125"/>-->
         <Button x:Name="AddToBasket" Grid.Column="1" Grid.Row="1" Content="Add to basket" Width="125" Click="AddToBasket_Click"/>
         <Button x:Name="RemoveFromBasket" Grid.Column="1" Grid.Row="2" Content="Remove from basket" Width="125" Click="RemoveFromBasket_Click"/>
         <Button x:Name="CreateYourOwnPizza" Grid.Column="1" Grid.Row="3" Content="Create your own pizza" Width="125" Click="CreateYourOwnPizza_Click"/>
-        <!--<Button x:Name="GoToBasket" Grid.Column="1" Grid.Row="3" Content="Basket" Width="125"/>-->
+        <Button x:Name="Order" Grid.Column="1" Grid.Row="4" Content="Order" Width="125" Click="Order_Click"/>
         <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="5" Width="120">
             <TextBlock Text="Menu"/>
             <ListView x:Name="ItemsInMenu" HorizontalContentAlignment="Stretch">
