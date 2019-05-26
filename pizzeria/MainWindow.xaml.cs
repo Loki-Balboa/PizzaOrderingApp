@@ -45,5 +45,17 @@ namespace Pizzeria
             base.OnClosing(e);
             pizzaWindow.Close();
         }
+
+        // Sposob nr 1
+        public void GetPizza(/*tu moze byc pizza jako argument*/)
+        {
+            // tu robisz co chcesz
+        }
+
+        // Sposob nr 2
+        public static void Test()
+        {
+            // z tym, ze tu masz dostep jedynie do statycznych rzeczy z klasy
+        }
     }
 }
