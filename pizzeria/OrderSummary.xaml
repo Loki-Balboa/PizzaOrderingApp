@@ -5,19 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
-        Title="OrderSummary" Height="450" Width="800">
+        Title="OrderSummary" Height="300" Width="200" 
+        WindowStyle="None" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-            <TextBlock Grid.Row="1" Text="Order Summary"/>
-            <!--<ListView Grid.Row="2" x:Name="OrderSummary">
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Order Summary"/>
+        <ListView x:Name="OrderList" Grid.Row="2" Grid.Column="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -32,11 +41,13 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>-->
-            <TextBlock Grid.Row="3" x:Name="TotalPrize"/>
-        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <Button x:Name="ConfirmButton" Content="Confirm Order" Click="ConfirmButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click"/>
+            </ListView>
+        <TextBlock x:Name="TotalPrize" Grid.Row="3" Grid.Column="1"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Button x:Name="ConfirmButton" Content="Confirm Order" 
+                    Click="ConfirmButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" 
+                    Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

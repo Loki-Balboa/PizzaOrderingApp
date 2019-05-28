@@ -13,21 +13,27 @@ namespace Pizzeria
         public OrderSummary()
         {
             InitializeComponent();
+            this.DataContext = totalPrize;
         }
 
         public void GetOrder()
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             totalPrize = CalculateTotalPrize(mainWindow.basket.ItemsInBasket);
-            //AddItemsToSummary(mainWindow.basket.ItemsInBasket);
-            TotalPrize.Text = string.Format("Total prize: {0} PLN", totalPrize.ToString());
+            AddItemsToSummary(mainWindow.basket.ItemsInBasket);
+            ChangeTotalPrizeText();
         }
         
+        private void ChangeTotalPrizeText()
+        {
+            TotalPrize.Text = string.Format("Total prize: {0} PLN", totalPrize.ToString());
+        }
+
         private void AddItemsToSummary(List<Pizza> pizzas)
         {
             foreach(Pizza pizza in pizzas)
             {
-                //OrderSummary.Items.Add(pizza);
+                OrderList.Items.Add(pizza);
             }
         }
         private float CalculateTotalPrize(List<Pizza> pizzas)
@@ -42,7 +48,11 @@ namespace Pizzeria
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.basket.ItemsInBasket.Clear();
+            mainWindow.BasketList.Items.Clear();
+            ChangeTotalPrizeText();
+            Hide();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

@@ -44,7 +44,7 @@ namespace Pizzeria
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.GetPizza(new Pizza("Custom Pizza", ingredients));
-            Hide();
+            Close();
         }
     }
 }

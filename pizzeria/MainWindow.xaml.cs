@@ -18,8 +18,8 @@ namespace Pizzeria
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
-            pizzaWindow = new CreatePizzaWindow();
-            pizzaWindow.Hide();
+            //pizzaWindow = new CreatePizzaWindow();
+            //pizzaWindow.Hide();
             orderSummary = new OrderSummary();
             orderSummary.Hide();
 
@@ -40,7 +40,14 @@ namespace Pizzeria
 
         private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
         {  
-            pizzaWindow.Show();
+            if(pizzaWindow != null)
+            {
+                pizzaWindow.Show();
+            }
+            else
+            {
+                pizzaWindow = new CreatePizzaWindow();
+            }
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)

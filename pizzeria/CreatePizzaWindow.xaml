@@ -5,26 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
-        Title="CreatePizzaWindow" Height="450" Width="800">
+        Title="CreatePizzaWindow" Height="450" Width="800" 
+        WindowStyle="None" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddButton" Content="Add Ingredient" Grid.Column="1" Grid.Row="1" Click="AddButton_Click"/>
-        <Button x:Name="RemoveButton" Content="Remove Ingredient" Grid.Column="2" Grid.Row="1" Click="RemoveButton_Click"/>
-        <ListView x:Name="IngredientsList" Grid.Column="1" Grid.Row="2">
+        <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" 
+                Content="Add Ingredient" Click="AddButton_Click"/>
+        <Button x:Name="RemoveButton" Grid.Row="1" Grid.Column="2" 
+                Content="Remove Ingredient" Click="RemoveButton_Click"/>
+        <ListView x:Name="IngredientsList" Grid.Row="2" Grid.Column="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -52,16 +56,19 @@
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Prize}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Prize}" 
+                                       HorizontalAlignment="Right" Margin="0,0,2,0"/>
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
-            <Button x:Name="CreatePizzaButton" Content="Create Pizza" Click="CreatePizzaButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3">
+            <Button x:Name="CreatePizzaButton" Content="Create Pizza" 
+                    Click="CreatePizzaButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" 
+                    Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>
