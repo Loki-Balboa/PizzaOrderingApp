@@ -18,8 +18,6 @@ namespace Pizzeria
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
-            //pizzaWindow = new CreatePizzaWindow();
-            //pizzaWindow.Hide();
             orderSummary = new OrderSummary();
             orderSummary.Hide();
 
@@ -28,26 +26,28 @@ namespace Pizzeria
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            basket.ItemsInBasket.Add((Pizza)ItemsInMenu.SelectedItem);
-            BasketList.Items.Add(ItemsInMenu.SelectedItem);
+            if(ItemsInMenu.SelectedItem != null)
+            {
+                basket.ItemsInBasket.Add((Pizza)ItemsInMenu.SelectedItem);
+                BasketList.Items.Add(ItemsInMenu.SelectedItem);
+                ItemsInMenu.UnselectAll();
+            }
         }
 
-        private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
+        private void RemoveFromBasket_Click(object sender, RoutedEventArgs e) //need to fix highlighting selection
         {
             basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
             BasketList.Items.Remove(BasketList.SelectedItem);
+            BasketList.UnselectAll();
         }
 
-        private void CreateYourOwnPizza_Click(object sender, RoutedEventArgs e)
+        private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            if(pizzaWindow != null)
-            {
-                pizzaWindow.Show();
-            }
-            else
+            if(ExtensionMethod.IsNull(pizzaWindow))
             {
                 pizzaWindow = new CreatePizzaWindow();
             }
+            pizzaWindow.Show();
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)

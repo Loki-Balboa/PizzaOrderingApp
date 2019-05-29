@@ -72,6 +72,7 @@
     <Compile Include="CreatePizzaWindow.xaml.cs">
       <DependentUpon>CreatePizzaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionMethod.cs" />
     <Compile Include="Ingredient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

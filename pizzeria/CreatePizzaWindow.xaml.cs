@@ -18,11 +18,6 @@ namespace Pizzeria
             IngredientsList.ItemsSource = menu.Ingredients;
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            Hide();
-        }
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             ingredients.Add((Ingredient)IngredientsList.SelectedItem);
@@ -44,7 +39,7 @@ namespace Pizzeria
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.GetPizza(new Pizza("Custom Pizza", ingredients));
-            Close();
+            Hide();
         }
     }
 }

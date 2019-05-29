@@ -30,13 +30,15 @@
                 Content="Add to basket" Width="125" Click="AddToBasket_Click"/>
         <Button x:Name="RemoveFromBasket" Grid.Row="2" Grid.Column="1" 
                 Content="Remove from basket" Width="125" Click="RemoveFromBasket_Click"/>
-        <Button x:Name="CreateYourOwnPizza" Grid.Row="3" Grid.Column="1" 
-                Content="Create your own pizza" Width="125" Click="CreateYourOwnPizza_Click"/>
+        <Button x:Name="CreateCustomPizza" Grid.Row="3" Grid.Column="1" 
+                Content="Create your own pizza" Width="125" Click="CreateCustomPizza_Click"/>
         <Button x:Name="Order" Grid.Row="4" Grid.Column="1" 
                 Content="Order" Width="125" Click="Order_Click"/>
-        <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Width="120">
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" 
+                    Margin="2.5,0,2.5,0" Width="auto">
             <TextBlock Text="Menu"/>
-            <ListView x:Name="ItemsInMenu" HorizontalContentAlignment="Stretch">
+            <ListView x:Name="ItemsInMenu"  
+                    Width="auto" HorizontalContentAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -53,9 +55,10 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Width="120">
+        <StackPanel Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" 
+                    Margin="2.5,0,2.5,0" Width="auto">
             <TextBlock Text="Basket"/>
-            <ListView x:Name="BasketList">
+            <ListView x:Name="BasketList" HorizontalContentAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

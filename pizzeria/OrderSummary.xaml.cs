@@ -51,6 +51,7 @@ namespace Pizzeria
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.basket.ItemsInBasket.Clear();
             mainWindow.BasketList.Items.Clear();
+            OrderList.Items.Clear();
             ChangeTotalPrizeText();
             Hide();
         }
