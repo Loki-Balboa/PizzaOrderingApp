@@ -16,12 +16,17 @@ namespace Pizzeria
         public MainWindow()
         {
             InitializeComponent();
-            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
             orderSummary = new OrderSummary();
             orderSummary.Hide();
 
-            ItemsInMenu.ItemsSource = menu.Pizzas;            
+            ItemsInMenu.ItemsSource = menu.Pizzas;
+        }
+
+        public void GetPizza(Pizza pizza)
+        {
+            basket.ItemsInBasket.Add(pizza);
+            BasketList.Items.Add(pizza);
         }
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
@@ -31,14 +36,16 @@ namespace Pizzeria
                 basket.ItemsInBasket.Add((Pizza)ItemsInMenu.SelectedItem);
                 BasketList.Items.Add(ItemsInMenu.SelectedItem);
                 ItemsInMenu.UnselectAll();
+                if (!BasketPanel.IsVisible) BasketPanel.Visibility = Visibility.Visible;
             }
         }
 
-        private void RemoveFromBasket_Click(object sender, RoutedEventArgs e) //need to fix highlighting selection
+        private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
         {
             basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
             BasketList.Items.Remove(BasketList.SelectedItem);
             BasketList.UnselectAll();
+            if(basket.ItemsInBasket.Count == 0) BasketPanel.Visibility = Visibility.Collapsed;
         }
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
@@ -55,18 +62,11 @@ namespace Pizzeria
             orderSummary.GetOrder();
             orderSummary.Show();
         }
-        
-        public void GetPizza(Pizza pizza)
-        {
-            basket.ItemsInBasket.Add(pizza);
-            BasketList.Items.Add(pizza);
-        }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            pizzaWindow.Close();
-            orderSummary.Close();
+            App.Current.Shutdown();
         }
     }
 }
