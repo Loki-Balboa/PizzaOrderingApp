@@ -58,6 +58,7 @@ namespace Pizzeria
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            OrderList.Items.Clear();
             Hide();
         }
     }

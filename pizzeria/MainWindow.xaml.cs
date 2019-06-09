@@ -37,6 +37,7 @@ namespace Pizzeria
                 BasketList.Items.Add(ItemsInMenu.SelectedItem);
                 ItemsInMenu.UnselectAll();
                 if (!BasketPanel.IsVisible) BasketPanel.Visibility = Visibility.Visible;
+
             }
         }
 

@@ -26,8 +26,8 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Order Summary"/>
-        <ListBox x:Name="OrderList" Grid.Row="2" Grid.Column="1">
-                <ListBox.ItemTemplate>
+        <ListView x:Name="OrderList" Grid.Row="2" Grid.Column="1">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -40,8 +40,8 @@
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ListView.ItemTemplate>
+            </ListView>
         <TextBlock x:Name="TotalPrize" Grid.Row="3" Grid.Column="1"/>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
             <Button x:Name="ConfirmButton" Content="Confirm Order" 
