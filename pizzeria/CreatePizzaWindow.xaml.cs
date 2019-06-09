@@ -26,7 +26,6 @@ namespace Pizzeria
                 SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
                 IngredientsList.UnselectAll();
                 if (!SelectedIngredientsPanel.IsVisible) SelectedIngredientsPanel.Visibility = Visibility.Visible;
-                
             }
             
         }
@@ -47,7 +46,10 @@ namespace Pizzeria
         private void CreatePizzaButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.GetPizza(new Pizza("Custom Pizza", ingredients));
+            mainWindow.AddPizza(new Pizza("Custom Pizza", ingredients));
+            ingredients.Clear();
+            SelectedIngredientsList.Items.Clear();
+            SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
             Hide();
         }
     }

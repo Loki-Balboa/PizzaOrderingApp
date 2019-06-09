@@ -23,30 +23,37 @@ namespace Pizzeria
             ItemsInMenu.ItemsSource = menu.Pizzas;
         }
 
-        public void GetPizza(Pizza pizza)
+        public void AddPizza(Pizza pizza)
         {
+            if (basket.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
             basket.ItemsInBasket.Add(pizza);
             BasketList.Items.Add(pizza);
+            ItemsInMenu.UnselectAll();
+            if (!OrderPanel.IsVisible) OrderPanel.Visibility = Visibility.Visible;
         }
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
             if(ItemsInMenu.SelectedItem != null)
             {
-                basket.ItemsInBasket.Add((Pizza)ItemsInMenu.SelectedItem);
-                BasketList.Items.Add(ItemsInMenu.SelectedItem);
-                ItemsInMenu.UnselectAll();
-                if (!BasketPanel.IsVisible) BasketPanel.Visibility = Visibility.Visible;
-
+                AddPizza((Pizza)ItemsInMenu.SelectedItem);
             }
         }
 
         private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
         {
-            basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
-            BasketList.Items.Remove(BasketList.SelectedItem);
-            BasketList.UnselectAll();
-            if(basket.ItemsInBasket.Count == 0) BasketPanel.Visibility = Visibility.Collapsed;
+            if(BasketList.SelectedItem != null)
+            {
+                basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
+                BasketList.Items.Remove(BasketList.SelectedItem);
+                BasketList.UnselectAll();
+                if (basket.ItemsInBasket.Count == 0)
+                {
+                    OrderPanel.Visibility = Visibility.Collapsed;
+                    EmptyLabel.Visibility = Visibility.Visible;
+                }
+            }
+            
         }
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
