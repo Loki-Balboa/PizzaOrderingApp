@@ -15,7 +15,7 @@ namespace Pizzeria
             this.Ingredients = ingredients;
             Prize = 15;
 
-            foreach (var ingredient in Ingredients)
+            foreach (Ingredient ingredient in Ingredients)
             {
                 Prize += ingredient.Prize;
             }

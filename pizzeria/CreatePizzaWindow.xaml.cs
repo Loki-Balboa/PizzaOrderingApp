@@ -20,14 +20,23 @@ namespace Pizzeria
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            ingredients.Add((Ingredient)IngredientsList.SelectedItem);
-            SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
+            if(IngredientsList.SelectedItem != null)
+            {
+                ingredients.Add((Ingredient)IngredientsList.SelectedItem);
+                SelectedIngredientsList.Items.Add(IngredientsList.SelectedItem);
+                IngredientsList.UnselectAll();
+                if (!SelectedIngredientsPanel.IsVisible) SelectedIngredientsPanel.Visibility = Visibility.Visible;
+                
+            }
+            
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             ingredients.Remove((Ingredient)SelectedIngredientsList.SelectedItem);
             SelectedIngredientsList.Items.Remove(SelectedIngredientsList.SelectedItem);
+            SelectedIngredientsList.UnselectAll();
+            if (ingredients.Count == 0) SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
