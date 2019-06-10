@@ -11,7 +11,7 @@ namespace Pizzeria
         public Basket basket = new Basket();
         public Menu menu = new Menu();
         private CreatePizzaWindow pizzaWindow;
-        private OrderSummary orderSummary;
+        private readonly OrderSummary orderSummary;
 
         public MainWindow()
         {
