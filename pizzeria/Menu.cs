@@ -13,13 +13,8 @@ namespace Pizzeria
         public Menu()
         {
             Ingredients = new List<Ingredient>();
+            Pizzas = new List<Pizza>();
             ReadFromFile();
-            Ingredient cheese = new Ingredient("Cheese", 3);
-            Ingredient salami = new Ingredient("Salami", 4);
-            Ingredient mushrooms = new Ingredient("Mushrooms", 2);
-            Pizza margharita = new Pizza("Margharita", new List<Ingredient> { cheese, salami });
-            Pizza capriciosa = new Pizza("Capriciosa", new List<Ingredient> { cheese, mushrooms });
-            Pizzas = new List<Pizza> { margharita, capriciosa};
         }
 
         public void AddPizza()
@@ -44,13 +39,63 @@ namespace Pizzeria
 
         private void ReadFromFile()
         {
+            ReadIngredients();
+            ReadPizzas();
+        }
+
+        private void ReadIngredients()
+        {
             string[] ingredients = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\ingredients.txt");
-            string[] pizzas= File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\menu.txt");
-            foreach(string ingredientDescription in ingredients)
+            foreach (string ingredientDescription in ingredients)
             {
                 string[] ingredient = ingredientDescription.Split(';');
                 this.Ingredients.Add(new Ingredient(ingredient[0], (float)Convert.ToDouble(ingredient[1])));
             }
+        }
+
+        private void ReadPizzas()
+        {
+            string[] pizzas = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\menu.txt");
+            foreach (string pizzaDescription in pizzas)
+            {
+                string[] pizza = pizzaDescription.Split(';');
+                //this.Pizzas.Add(new Pizza(pizza[0], MatchIngredients(pizza)));
+
+                if (string.IsNullOrEmpty(pizza[2]))
+                {
+                    this.Pizzas.Add(new Pizza(pizza[0], MatchIngredients(pizza)));
+                }
+                else
+                {
+                    float prize;
+                    if (float.TryParse(pizza[2], out prize))
+                    {
+                        this.Pizzas.Add(new Pizza(pizza[0], MatchIngredients(pizza), (float)Convert.ToDouble(pizza[2])));
+                    }
+                    else
+                    {
+                        throw new Exception(string.Format("Prize in {0} in wrong format", pizza[0]));
+                    }
+                }
+            }
+        }
+
+        private List<Ingredient> MatchIngredients(string[] pizza)
+        {
+            string[] ingredientNames = pizza[1].Split(',');
+            List<Ingredient> ingredients = new List<Ingredient>();
+
+            foreach (string ingredientName in ingredientNames)
+            {
+                foreach (Ingredient ingredient in this.Ingredients)
+                {
+                    if (ingredientName.Equals(ingredient.Name))
+                    {
+                        ingredients.Add(ingredient);
+                    }
+                }
+            }
+            return ingredients;
         }
     }
 }

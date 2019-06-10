@@ -7,7 +7,7 @@ namespace Pizzeria
         public string Name { get; set; }
         public List<Ingredient> Ingredients{ get; set; }
         public enum Size { Small, Medium, Large }
-        public float Prize { get; private set; }
+        public float Prize { get; set; }
 
         public Pizza(string name, List<Ingredient> ingredients)
         {
@@ -19,22 +19,12 @@ namespace Pizzeria
             {
                 Prize += ingredient.Prize;
             }
-
         }
-
-        private void CalculatePrize(Pizza.Size size)
+        public Pizza(string name, List<Ingredient> ingredients, float prize)
         {
-            switch(size)
-            {
-                case Size.Medium:
-                    Prize *= (float)1.25;
-                    break;
-                case Size.Large:
-                    Prize *= (float)1.5;
-                    break;
-                default:
-                    break;
-            }
+            this.Name = name;
+            this.Ingredients = ingredients;
+            this.Prize = prize;
         }
     }
 }

@@ -1,0 +1,3 @@
+Margharita;Cheese,Salami;
+Capriciosa;Cheese,Mushrooms;
+Pizza za 30 ziko;Cheese,Cheese;30
