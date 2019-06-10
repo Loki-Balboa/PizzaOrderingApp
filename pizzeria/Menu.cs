@@ -59,7 +59,6 @@ namespace Pizzeria
             foreach (string pizzaDescription in pizzas)
             {
                 string[] pizza = pizzaDescription.Split(';');
-                //this.Pizzas.Add(new Pizza(pizza[0], MatchIngredients(pizza)));
 
                 if (string.IsNullOrEmpty(pizza[2]))
                 {
