@@ -27,7 +27,6 @@ namespace Pizzeria
                 IngredientsList.UnselectAll();
                 if (!SelectedIngredientsPanel.IsVisible) SelectedIngredientsPanel.Visibility = Visibility.Visible;
             }
-            
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -45,12 +44,19 @@ namespace Pizzeria
 
         private void CreatePizzaButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.AddPizza(new Pizza("Custom Pizza", ingredients));
-            ingredients.Clear();
-            SelectedIngredientsList.Items.Clear();
-            SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
-            Hide();
+            if(ingredients.Count == 0)
+            {
+                MessageBoxResult noIngredients = MessageBox.Show("List of ingredients is empty. Choose some ingredients first!","No ingredients!");
+            }
+            else
+            {
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.AddPizza(new Pizza("Custom Pizza", ingredients));
+                ingredients.Clear();
+                SelectedIngredientsList.Items.Clear();
+                SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
+                Hide();
+            }
         }
     }
 }
