@@ -26,7 +26,6 @@
         </Grid.RowDefinitions>
         <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" 
                 Content="Add Ingredient" Click="AddButton_Click"/>
-        
         <ListView x:Name="IngredientsList" Grid.Row="2" Grid.Column="1"
                   Width="auto">
             <ListView.ItemTemplate>
@@ -72,6 +71,10 @@
                     Click="CreatePizzaButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" 
                     Click="CancelButton_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3">
+            <TextBlock Text="Prize:"/>
+            <TextBlock x:Name="CustomPizzaPrize"/>
         </StackPanel>
     </Grid>
 </Window>
