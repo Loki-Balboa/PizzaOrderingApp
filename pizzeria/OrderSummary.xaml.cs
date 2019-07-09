@@ -29,19 +29,19 @@ namespace Pizzeria
             TotalPrize.Text = string.Format("Total prize: {0} PLN", totalPrize.ToString());
         }
 
-        private void AddItemsToSummary(List<Pizza> pizzas)
+        private void AddItemsToSummary(List<MenuItem> items)
         {
-            foreach(Pizza pizza in pizzas)
+            foreach(MenuItem item in items)
             {
-                OrderList.Items.Add(pizza);
+                OrderList.Items.Add(item);
             }
         }
-        private float CalculateTotalPrize(List<Pizza> pizzas)
+        private float CalculateTotalPrize(List<MenuItem> items)
         {
             float totalPrize = 0;
-            foreach (Pizza pizza in pizzas)
+            foreach (MenuItem item in items)
             {
-                totalPrize += pizza.Prize;
+                totalPrize += item.Prize;
             }
             return totalPrize;
         }
@@ -51,6 +51,8 @@ namespace Pizzeria
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.basket.ItemsInBasket.Clear();
             mainWindow.BasketList.Items.Clear();
+            mainWindow.OrderPanel.Visibility = Visibility.Collapsed;
+            mainWindow.EmptyLabel.Visibility = Visibility.Visible;
             OrderList.Items.Clear();
             ChangeTotalPrizeText();
             Hide();

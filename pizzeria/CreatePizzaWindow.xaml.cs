@@ -51,7 +51,7 @@ namespace Pizzeria
             else
             {
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-                mainWindow.AddPizza(new Pizza("Custom Pizza", ingredients));
+                mainWindow.AddItem(new Pizza("Custom Pizza", ingredients));
                 ingredients.Clear();
                 SelectedIngredientsList.Items.Clear();
                 SelectedIngredientsPanel.Visibility = Visibility.Collapsed;

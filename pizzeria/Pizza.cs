@@ -2,14 +2,9 @@
 
 namespace Pizzeria
 {
-    public class Pizza
+    public class Pizza : MenuItem
     {
-        public string Name { get; }
         public List<Ingredient> Ingredients{ get; set; }
-        public enum Size { Small, Medium, Large }
-        public float BasePrize { get; set; }
-        public float Prize { get; set; }
-
         public Pizza(string name, List<Ingredient> ingredients)
         {
             this.Name = name;

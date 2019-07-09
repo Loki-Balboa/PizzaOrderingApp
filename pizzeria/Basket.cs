@@ -4,11 +4,11 @@ namespace Pizzeria
 {
     public class Basket
     {
-        public List<Pizza> ItemsInBasket { get; set; }
+        public List<MenuItem> ItemsInBasket { get; set; }
 
         public Basket()
         {
-            ItemsInBasket = new List<Pizza>();
+            ItemsInBasket = new List<MenuItem>();
         }
         public void AddItem()
         {

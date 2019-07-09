@@ -8,39 +8,21 @@ namespace Pizzeria
     {
         public List<Ingredient> Ingredients { get; set; }
         public List<Pizza> Pizzas { get; set; }
-        //public List<Drink> Drinks { get; set; }
+        public List<Drink> Drinks { get; set; }
 
         public Menu()
         {
             Ingredients = new List<Ingredient>();
             Pizzas = new List<Pizza>();
+            Drinks = new List<Drink>();
             ReadFromFile();
-        }
-
-        public void AddPizza()
-        {
-            //Pizzas.Add(new Pizza());
-        }
-
-        public void RemovePizza()
-        {
-            //Pizzas.Remove();
-        }
-
-        public void AddIngredient()
-        {
-            //Ingredients.Add(new Ingredient());
-        }
-
-        public void RemoveIngredient()
-        {
-            //Ingredients.Remove();
         }
 
         private void ReadFromFile()
         {
             ReadIngredients();
             ReadPizzas();
+            ReadDrinks();
         }
 
         private void ReadIngredients()
@@ -76,6 +58,16 @@ namespace Pizzeria
                         throw new Exception(string.Format("Prize in {0} in wrong format", pizza[0]));
                     }
                 }
+            }
+        }
+
+        private void ReadDrinks()
+        {
+            string[] drinks = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\drinks.txt");
+            foreach (string drinkDescription in drinks)
+            {
+                string[] drink = drinkDescription.Split(';');
+                this.Drinks.Add(new Drink(drink[0], (float)Convert.ToDouble(drink[1])));
             }
         }
 
