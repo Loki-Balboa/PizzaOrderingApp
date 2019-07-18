@@ -1,0 +1,3 @@
+Water;3
+Coca Cola;5
+Beer;8

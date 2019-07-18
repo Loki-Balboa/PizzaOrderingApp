@@ -20,23 +20,28 @@ namespace Pizzeria
             orderSummary = new OrderSummary();
             orderSummary.Hide();
 
-            ItemsInMenu.ItemsSource = menu.Pizzas;
+            PizzasInMenuList.ItemsSource = menu.Pizzas;
+            DrinksInMenuList.ItemsSource = menu.Drinks;
         }
 
-        public void AddPizza(Pizza pizza)
+        public void AddItem(MenuItem item)
         {
             if (basket.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
-            basket.ItemsInBasket.Add(pizza);
-            BasketList.Items.Add(pizza);
-            ItemsInMenu.UnselectAll();
+            basket.ItemsInBasket.Add(item);
+            BasketList.Items.Add(item);
+            PizzasInMenuList.UnselectAll();
             if (!OrderPanel.IsVisible) OrderPanel.Visibility = Visibility.Visible;
         }
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(ItemsInMenu.SelectedItem != null)
+            if(PizzasInMenuList.SelectedItem != null)
             {
-                AddPizza((Pizza)ItemsInMenu.SelectedItem);
+                AddItem((MenuItem)PizzasInMenuList.SelectedItem);
+            }
+            else if(DrinksInMenuList.SelectedItem != null)
+            {
+                AddItem((MenuItem)DrinksInMenuList.SelectedItem);
             }
         }
 
@@ -44,7 +49,7 @@ namespace Pizzeria
         {
             if(BasketList.SelectedItem != null)
             {
-                basket.ItemsInBasket.Remove((Pizza)BasketList.SelectedItem);
+                basket.ItemsInBasket.Remove((MenuItem)BasketList.SelectedItem);
                 BasketList.Items.Remove(BasketList.SelectedItem);
                 BasketList.UnselectAll();
                 if (basket.ItemsInBasket.Count == 0)
@@ -53,7 +58,6 @@ namespace Pizzeria
                     EmptyLabel.Visibility = Visibility.Visible;
                 }
             }
-            
         }
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
@@ -63,6 +67,16 @@ namespace Pizzeria
                 pizzaWindow = new CreatePizzaWindow();
             }
             pizzaWindow.Show();
+        }
+
+        private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            PizzasInMenuList.SelectedItems.Clear();
+        }
+
+        private void PizzasInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            DrinksInMenuList.SelectedItems.Clear();
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)

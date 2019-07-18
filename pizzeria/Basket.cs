@@ -10,9 +10,5 @@ namespace Pizzeria
         {
             ItemsInBasket = new List<MenuItem>();
         }
-        public void AddItem()
-        {
-            //ItemsInBasket.Add();
-        }
     }
 }

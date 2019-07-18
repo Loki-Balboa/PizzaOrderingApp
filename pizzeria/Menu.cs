@@ -20,14 +20,15 @@ namespace Pizzeria
 
         private void ReadFromFile()
         {
-            ReadIngredients();
-            ReadPizzas();
-            ReadDrinks();
+            string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
+            ReadIngredients(currentPath);
+            ReadPizzas(currentPath);
+            ReadDrinks(currentPath);
         }
 
-        private void ReadIngredients()
+        private void ReadIngredients(string currentPath)
         {
-            string[] ingredients = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\ingredients.txt");
+            string[] ingredients = File.ReadAllLines(currentPath + @"\data\ingredients.txt");
             foreach (string ingredientDescription in ingredients)
             {
                 string[] ingredient = ingredientDescription.Split(';');
@@ -35,9 +36,9 @@ namespace Pizzeria
             }
         }
 
-        private void ReadPizzas()
+        private void ReadPizzas(string currentPath)
         {
-            string[] pizzas = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\menu.txt");
+            string[] pizzas = File.ReadAllLines(currentPath + @"\data\pizzas.txt");
             foreach (string pizzaDescription in pizzas)
             {
                 string[] pizza = pizzaDescription.Split(';');
@@ -61,9 +62,9 @@ namespace Pizzeria
             }
         }
 
-        private void ReadDrinks()
+        private void ReadDrinks(string currentPath)
         {
-            string[] drinks = File.ReadAllLines(@"C:\Users\plubs\source\repos\Pizzeria\drinks.txt");
+            string[] drinks = File.ReadAllLines(currentPath + @"\data\drinks.txt");
             foreach (string drinkDescription in drinks)
             {
                 string[] drink = drinkDescription.Split(';');
