@@ -5,8 +5,6 @@ namespace Pizzeria
     public class Pizza : MenuItem
     {
         public List<Ingredient> Ingredients{ get; set; }
-        //readonly float BasePrize = 15;
-        public enum Size { Small, Medium, Large }
         public Pizza(string name, List<Ingredient> ingredients)
         {
             this.Name = name;

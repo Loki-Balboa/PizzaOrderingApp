@@ -2,11 +2,12 @@
 
 namespace Pizzeria
 {
-    public class Basket
+    public class Order
     {
         public List<MenuItem> ItemsInBasket { get; set; }
+        public int Number { get; set; }
 
-        public Basket()
+        public Order()
         {
             ItemsInBasket = new List<MenuItem>();
         }
