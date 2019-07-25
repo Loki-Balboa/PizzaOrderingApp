@@ -12,7 +12,6 @@ namespace Pizzeria
     /// </summary>
     public partial class OrderSummary : Window
     {
-        public float TotalPrize { get; set; }
         public OrderSummary()
         {
             InitializeComponent();
