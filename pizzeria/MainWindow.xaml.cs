@@ -8,7 +8,7 @@ namespace Pizzeria
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Basket basket = new Basket();
+        public Order order = new Order();
         public Menu menu = new Menu();
         private CreatePizzaWindow pizzaWindow;
         private readonly OrderSummary orderSummary;
@@ -26,8 +26,8 @@ namespace Pizzeria
 
         public void AddItem(MenuItem item)
         {
-            if (basket.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
-            basket.ItemsInBasket.Add(item);
+            if (order.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
+            order.ItemsInBasket.Add(item);
             BasketList.Items.Add(item);
             PizzasInMenuList.UnselectAll();
             if (!OrderPanel.IsVisible) OrderPanel.Visibility = Visibility.Visible;
@@ -49,10 +49,10 @@ namespace Pizzeria
         {
             if(BasketList.SelectedItem != null)
             {
-                basket.ItemsInBasket.Remove((MenuItem)BasketList.SelectedItem);
+                order.ItemsInBasket.Remove((MenuItem)BasketList.SelectedItem);
                 BasketList.Items.Remove(BasketList.SelectedItem);
                 BasketList.UnselectAll();
-                if (basket.ItemsInBasket.Count == 0)
+                if (order.ItemsInBasket.Count == 0)
                 {
                     OrderPanel.Visibility = Visibility.Collapsed;
                     EmptyLabel.Visibility = Visibility.Visible;

@@ -42,7 +42,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        <TextBlock x:Name="TotalPrize" Grid.Row="3" Grid.Column="1"/>
+        <TextBlock x:Name="TotalPrizeLabel" Grid.Row="3" Grid.Column="1"/>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
             <Button x:Name="ConfirmButton" Content="Confirm Order" 
                     Click="ConfirmButton_Click"/>

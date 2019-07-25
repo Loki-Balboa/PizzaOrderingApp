@@ -68,7 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Basket.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="CreatePizzaWindow.xaml.cs">
       <DependentUpon>CreatePizzaWindow.xaml</DependentUpon>
     </Compile>
