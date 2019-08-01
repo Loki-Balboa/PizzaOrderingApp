@@ -3,14 +3,33 @@
     public class MenuItem
     {
         public string Name { get; set; }
-        readonly float BasePrize = 15;
-        public float Prize { get; set; }
+        public float BasePrice { get; set; }
+        public float CurrentPrice { get; set; }
         public enum Size { Small, Medium, Large }
-        public float CurrentPrize { get; set; }
-
-        public void SetCurrentPrize()
+        public MenuItem(string name)
         {
-            //ustawienie ceny przedmiotu w zależności od rozmiaru
+            this.Name = name;
+        }
+        public void SetSize(MenuItem.Size size)
+        {
+            switch (size)
+            {
+                case Size.Small:
+                    {
+                        CurrentPrice = 0.75f * BasePrice;
+                        break;
+                    }
+                case Size.Medium:
+                    {
+                        CurrentPrice = BasePrice;
+                        break;
+                    }
+                case Size.Large:
+                    {
+                        CurrentPrice = 1.25f * BasePrice;
+                        break;
+                    }
+            }
         }
     }
 }

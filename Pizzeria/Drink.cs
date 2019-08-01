@@ -2,10 +2,9 @@
 {
     public class Drink : MenuItem
     {
-        public Drink(string name, float prize)
+        public Drink(string name, float prize) : base(name)
         {
-            this.Name = name;
-            this.Prize = prize;
+            this.BasePrice = prize;
         }
     }
 }

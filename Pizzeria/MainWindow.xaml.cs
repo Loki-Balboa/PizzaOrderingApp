@@ -10,13 +10,13 @@ namespace Pizzeria
     {
         public Order order = new Order();
         public Menu menu = new Menu();
+        private object currentSelection;
         private CreatePizzaWindow pizzaWindow;
         private readonly OrderSummary orderSummary;
 
         public MainWindow()
         {
             InitializeComponent();
-
             orderSummary = new OrderSummary();
             orderSummary.Hide();
 
@@ -35,13 +35,10 @@ namespace Pizzeria
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(PizzasInMenuList.SelectedItem != null)
+            if(currentSelection!= null)
             {
-                AddItem((MenuItem)PizzasInMenuList.SelectedItem);
-            }
-            else if(DrinksInMenuList.SelectedItem != null)
-            {
-                AddItem((MenuItem)DrinksInMenuList.SelectedItem);
+                MenuItem item = (MenuItem)currentSelection;
+                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(item);
             }
         }
 
@@ -62,7 +59,7 @@ namespace Pizzeria
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            if(ExtensionMethod.IsNull(pizzaWindow))
+            if(pizzaWindow == null)
             {
                 pizzaWindow = new CreatePizzaWindow();
             }
@@ -72,11 +69,13 @@ namespace Pizzeria
         private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             PizzasInMenuList.SelectedItems.Clear();
+            currentSelection = DrinksInMenuList.SelectedItem;
         }
 
         private void PizzasInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DrinksInMenuList.SelectedItems.Clear();
+            currentSelection = PizzasInMenuList.SelectedItem;
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)

@@ -5,22 +5,21 @@ namespace Pizzeria
     public class Pizza : MenuItem
     {
         public List<Ingredient> Ingredients{ get; set; }
-        public Pizza(string name, List<Ingredient> ingredients)
+        public Pizza(string name, List<Ingredient> ingredients) : base(name)
         {
-            this.Name = name;
             this.Ingredients = ingredients;
-            Prize = 15;
+            BasePrice = 15;
 
             foreach (Ingredient ingredient in Ingredients)
             {
-                Prize += ingredient.Prize;
+                BasePrice += ingredient.Price;
             }
         }
-        public Pizza(string name, List<Ingredient> ingredients, float prize)
+        public Pizza(string name, List<Ingredient> ingredients, float prize) : base(name)
         {
-            this.Name = name;
             this.Ingredients = ingredients;
-            this.Prize = prize;
+            this.BasePrice = prize;
         }
+        
     }
 }

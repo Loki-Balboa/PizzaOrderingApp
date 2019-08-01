@@ -3,13 +3,13 @@
     public class Ingredient
     {
         public string Name { get; set; }
-        public float Prize { get; set; }
+        public float Price { get; set; }
         public enum Size { Small, Medium, Large }
 
-        public Ingredient(string name, float prize)
+        public Ingredient(string name, float price)
         {
             this.Name = name;
-            this.Prize = prize;
+            this.Price = price;
         }
     }
 }

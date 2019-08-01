@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.IO;
-using System;
-using System.Configuration;
-using pizzeria.Properties;
 
 namespace Pizzeria
 {
@@ -23,9 +19,9 @@ namespace Pizzeria
             AddItemsToSummary(mainWindow.order.ItemsInBasket);
             ChangeTotalPrizeText(mainWindow.order.TotalPrize);
         }
-        private void ChangeTotalPrizeText(float prize)
+        private void ChangeTotalPrizeText(float price)
         {
-            TotalPrizeLabel.Text = string.Format("Total prize: {0} PLN", prize.ToString());
+            TotalPrizeLabel.Text = string.Format("Total prize: {0} PLN", price.ToString());
         }
         private void AddItemsToSummary(List<MenuItem> items)
         {

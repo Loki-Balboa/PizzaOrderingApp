@@ -30,7 +30,7 @@ namespace Pizzeria
 
             foreach (MenuItem item in ItemsInBasket)
             {
-                orderFile.WriteLine(String.Format("{0} {1} PLN",item.Name, item.Prize));
+                orderFile.WriteLine(String.Format("{0} {1} PLN",item.Name, item.BasePrice));
             }
             orderFile.WriteLine(String.Format("Sum:{0} PLN", TotalPrize));
             orderFile.Close();
@@ -41,7 +41,7 @@ namespace Pizzeria
             TotalPrize = 0;
             foreach (MenuItem item in ItemsInBasket)
             {
-                TotalPrize += item.Prize;
+                TotalPrize += item.CurrentPrice;
             }
         }
     }

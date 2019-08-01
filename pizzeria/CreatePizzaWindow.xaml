@@ -37,7 +37,7 @@
                             <ColumnDefinition Width="20"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Prize}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Price}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
                         <TextBlock Grid.Column="2" Text="PLN"/>
                     </Grid>
                 </DataTemplate>
@@ -58,7 +58,7 @@
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Prize}" 
+                            <TextBlock Grid.Column="1" Text="{Binding Price}" 
                                        HorizontalAlignment="Right" Margin="0,0,2,0"/>
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
