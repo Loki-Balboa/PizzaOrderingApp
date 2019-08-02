@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Collections.Generic;
+using System;
 
 namespace Pizzeria
 {
@@ -49,8 +50,10 @@ namespace Pizzeria
             }
             else
             {
-                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-                mainWindow.AddItem(new Pizza("Custom Pizza", ingredients));
+                MenuItem customPizza = new Pizza("Custom Pizza", ingredients);
+                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(customPizza.Name, customPizza.BasePrice));
+                chooseSizeWindow.Owner = this;
+                Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
                 ingredients.Clear();
                 SelectedIngredientsList.Items.Clear();
                 SelectedIngredientsPanel.Visibility = Visibility.Collapsed;

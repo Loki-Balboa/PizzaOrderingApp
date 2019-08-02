@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Pizzeria
@@ -10,16 +11,13 @@ namespace Pizzeria
     {
         public Order order = new Order();
         public Menu menu = new Menu();
-        private CreatePizzaWindow pizzaWindow;
-        private readonly OrderSummary orderSummary;
+        private object currentSelection;
+        private CreatePizzaWindow createPizzaWindow;
+        private OrderSummaryWindow orderSummaryWindow;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            orderSummary = new OrderSummary();
-            orderSummary.Hide();
-
             PizzasInMenuList.ItemsSource = menu.Pizzas;
             DrinksInMenuList.ItemsSource = menu.Drinks;
         }
@@ -29,19 +27,17 @@ namespace Pizzeria
             if (order.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
             order.ItemsInBasket.Add(item);
             BasketList.Items.Add(item);
-            PizzasInMenuList.UnselectAll();
             if (!OrderPanel.IsVisible) OrderPanel.Visibility = Visibility.Visible;
         }
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(PizzasInMenuList.SelectedItem != null)
+            if(currentSelection != null)
             {
-                AddItem((MenuItem)PizzasInMenuList.SelectedItem);
-            }
-            else if(DrinksInMenuList.SelectedItem != null)
-            {
-                AddItem((MenuItem)DrinksInMenuList.SelectedItem);
+                MenuItem item = (MenuItem)currentSelection;
+                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
+                chooseSizeWindow.Owner = this;
+                Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
             }
         }
 
@@ -62,27 +58,35 @@ namespace Pizzeria
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            if(ExtensionMethod.IsNull(pizzaWindow))
+            if(createPizzaWindow == null)
             {
-                pizzaWindow = new CreatePizzaWindow();
+                createPizzaWindow = new CreatePizzaWindow();
+                createPizzaWindow.Owner = this;
             }
-            pizzaWindow.Show();
+            Nullable<bool> createPizzaResult = createPizzaWindow.ShowDialog();
         }
 
         private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             PizzasInMenuList.SelectedItems.Clear();
+            currentSelection = DrinksInMenuList.SelectedItem;
         }
 
         private void PizzasInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DrinksInMenuList.SelectedItems.Clear();
+            currentSelection = PizzasInMenuList.SelectedItem;
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-            orderSummary.GetOrder();
-            orderSummary.Show();
+            if (orderSummaryWindow == null)
+            {
+                orderSummaryWindow = new OrderSummaryWindow();
+                orderSummaryWindow.Owner = this;
+            }
+            orderSummaryWindow.GetOrder();
+            Nullable<bool> orderResult = orderSummaryWindow.ShowDialog();
         }
 
         protected override void OnClosing(CancelEventArgs e)
