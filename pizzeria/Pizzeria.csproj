@@ -85,7 +85,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OrderSummary.xaml">
+    <Page Include="OrderSummaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,8 +93,8 @@
   <ItemGroup>
     <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs" />
-    <Compile Include="OrderSummary.xaml.cs">
-      <DependentUpon>OrderSummary.xaml</DependentUpon>
+    <Compile Include="OrderSummaryWindow.xaml.cs">
+      <DependentUpon>OrderSummaryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pizza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

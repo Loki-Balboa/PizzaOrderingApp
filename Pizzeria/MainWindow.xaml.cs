@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Pizzeria
@@ -11,8 +12,8 @@ namespace Pizzeria
         public Order order = new Order();
         public Menu menu = new Menu();
         private object currentSelection;
-        private CreatePizzaWindow pizzaWindow;
-        private OrderSummaryWindow orderSummary;
+        private CreatePizzaWindow createPizzaWindow;
+        private OrderSummaryWindow orderSummaryWindow;
 
         public MainWindow()
         {
@@ -35,6 +36,8 @@ namespace Pizzeria
             {
                 MenuItem item = (MenuItem)currentSelection;
                 ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
+                chooseSizeWindow.Owner = this;
+                Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
             }
         }
 
@@ -55,11 +58,12 @@ namespace Pizzeria
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            if(pizzaWindow == null)
+            if(createPizzaWindow == null)
             {
-                pizzaWindow = new CreatePizzaWindow();
+                createPizzaWindow = new CreatePizzaWindow();
+                createPizzaWindow.Owner = this;
             }
-            pizzaWindow.Show();
+            Nullable<bool> createPizzaResult = createPizzaWindow.ShowDialog();
         }
 
         private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -76,12 +80,13 @@ namespace Pizzeria
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-            if (orderSummary == null)
+            if (orderSummaryWindow == null)
             {
-                orderSummary = new OrderSummaryWindow();
+                orderSummaryWindow = new OrderSummaryWindow();
+                orderSummaryWindow.Owner = this;
             }
-            orderSummary.GetOrder();
-            orderSummary.Show();
+            orderSummaryWindow.GetOrder();
+            Nullable<bool> orderResult = orderSummaryWindow.ShowDialog();
         }
 
         protected override void OnClosing(CancelEventArgs e)

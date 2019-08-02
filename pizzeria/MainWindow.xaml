@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="600" 
-        SizeToContent="Width" WindowStartupLocation="CenterScreen">
+        Title="Pizza Ordering App" Height="300" Width="600" 
+        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2.5,0,2.5,2.5"/>
@@ -51,11 +51,12 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
+                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
                     </DataTemplate>
@@ -69,11 +70,12 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
+                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
                     </DataTemplate>

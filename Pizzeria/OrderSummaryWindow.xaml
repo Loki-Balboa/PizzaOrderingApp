@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="OrderSummary" Height="300" Width="200" 
         WindowStyle="None" SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -32,12 +32,12 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
                             <TextBlock Grid.Column="1" Text="{Binding CurrentPrice}" 
-                                       HorizontalAlignment="Right" Margin="0,0,2,0"/>
+                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
                             <TextBlock Grid.Column="2" Text="PLN"/>
                         </Grid>
                     </DataTemplate>

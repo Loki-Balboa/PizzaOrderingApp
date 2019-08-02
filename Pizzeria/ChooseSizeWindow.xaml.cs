@@ -12,7 +12,6 @@ namespace Pizzeria
         public ChooseSizeWindow(MenuItem item)
         {
             InitializeComponent();
-            Show();
             this.Item = item;
         }
 
