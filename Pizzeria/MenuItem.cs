@@ -10,6 +10,11 @@
         {
             this.Name = name;
         }
+        public MenuItem(string name, float basePrice)
+        {
+            this.Name = name;
+            this.BasePrice = basePrice;
+        }
         public void SetSize(MenuItem.Size size)
         {
             switch (size)

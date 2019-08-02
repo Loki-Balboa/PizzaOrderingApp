@@ -6,9 +6,9 @@ namespace Pizzeria
     /// <summary>
     /// Interaction logic for OrderSummary.xaml
     /// </summary>
-    public partial class OrderSummary : Window
+    public partial class OrderSummaryWindow : Window
     {
-        public OrderSummary()
+        public OrderSummaryWindow()
         {
             InitializeComponent();
         }

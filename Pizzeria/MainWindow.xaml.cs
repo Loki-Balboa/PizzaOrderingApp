@@ -12,14 +12,11 @@ namespace Pizzeria
         public Menu menu = new Menu();
         private object currentSelection;
         private CreatePizzaWindow pizzaWindow;
-        private readonly OrderSummary orderSummary;
+        private OrderSummaryWindow orderSummary;
 
         public MainWindow()
         {
             InitializeComponent();
-            orderSummary = new OrderSummary();
-            orderSummary.Hide();
-
             PizzasInMenuList.ItemsSource = menu.Pizzas;
             DrinksInMenuList.ItemsSource = menu.Drinks;
         }
@@ -29,16 +26,15 @@ namespace Pizzeria
             if (order.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
             order.ItemsInBasket.Add(item);
             BasketList.Items.Add(item);
-            PizzasInMenuList.UnselectAll();
             if (!OrderPanel.IsVisible) OrderPanel.Visibility = Visibility.Visible;
         }
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(currentSelection!= null)
+            if(currentSelection != null)
             {
                 MenuItem item = (MenuItem)currentSelection;
-                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(item);
+                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
             }
         }
 
@@ -80,6 +76,10 @@ namespace Pizzeria
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
+            if (orderSummary == null)
+            {
+                orderSummary = new OrderSummaryWindow();
+            }
             orderSummary.GetOrder();
             orderSummary.Show();
         }
