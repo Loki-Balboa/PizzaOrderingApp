@@ -58,11 +58,8 @@ namespace Pizzeria
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            if(createPizzaWindow == null)
-            {
-                createPizzaWindow = new CreatePizzaWindow();
-                createPizzaWindow.Owner = this;
-            }
+            createPizzaWindow = new CreatePizzaWindow();
+            createPizzaWindow.Owner = this;
             Nullable<bool> createPizzaResult = createPizzaWindow.ShowDialog();
         }
 

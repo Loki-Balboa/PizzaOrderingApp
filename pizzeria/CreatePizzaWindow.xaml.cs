@@ -54,11 +54,15 @@ namespace Pizzeria
                 ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(customPizza.Name, customPizza.BasePrice));
                 chooseSizeWindow.Owner = this;
                 Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
-                ingredients.Clear();
-                SelectedIngredientsList.Items.Clear();
-                SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
-                Hide();
+                Close();
             }
+        }
+        private void ClearWindow()
+        {
+            ingredients.Clear();
+            SelectedIngredientsList.Items.Clear();
+            SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
+            Hide();
         }
     }
 }
