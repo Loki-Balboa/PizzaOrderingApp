@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:Pizzeria"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="ColumnHeaderHidden" TargetType="GridViewColumnHeader">
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2.5,0,2.5,0"/>
         </Style>

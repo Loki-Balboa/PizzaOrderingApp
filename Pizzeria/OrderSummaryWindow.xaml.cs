@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Pizzeria
@@ -23,7 +24,7 @@ namespace Pizzeria
         {
             TotalPrizeLabel.Text = string.Format("Total prize: {0} PLN", price.ToString());
         }
-        private void AddItemsToSummary(List<MenuItem> items)
+        private void AddItemsToSummary(ObservableCollection<MenuItem> items)
         {
             foreach(MenuItem item in items)
             {

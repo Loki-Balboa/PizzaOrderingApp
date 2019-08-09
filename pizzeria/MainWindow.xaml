@@ -45,43 +45,47 @@
             <TextBlock Text="Menu"/>
             <TextBlock Text="Pizzas"/>
             <ListView x:Name="PizzasInMenuList"  
-                    Width="auto" HorizontalContentAlignment="Stretch" SelectionChanged="PizzasInMenuList_SelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
-                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
-                            <TextBlock Grid.Column="2" Text="PLN"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                    Width="auto" HorizontalContentAlignment="Stretch" 
+                    SelectionChanged="PizzasInMenuList_SelectionChanged">
+                <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" 
+                                               MouseEnter="TextBlock_MouseEnter"
+                                               MouseLeave="TextBlock_MouseLeave"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn> 
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="PLN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
             </ListView>
             <TextBlock Text="Drinks"/>
             <ListView x:Name="DrinksInMenuList"  
                     Width="auto" HorizontalContentAlignment="Stretch" SelectionChanged="DrinksInMenuList_SelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
-                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
-                            <TextBlock Grid.Column="2" Text="PLN"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="PLN"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
-
         </StackPanel>
         <StackPanel x:Name="BasketPanel" Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" 
                     Margin="2.5,0,2.5,0" Width="auto">
@@ -89,26 +93,23 @@
             <TextBlock x:Name="EmptyLabel" Text="Empty"/>
             <StackPanel x:Name="OrderPanel" Visibility="Collapsed">
                 <ListView x:Name="BasketList" HorizontalContentAlignment="Stretch">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="20"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                                <TextBlock Grid.Column="1" Text="{Binding CurrentPrice}" 
-                                           HorizontalAlignment="Right" Margin="0,0,2,0"/>
-                                <TextBlock Grid.Column="2" Text="PLN"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding CurrentPrice}"/>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="PLN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
                 </ListView>
                 <Button x:Name="Order" Content="Order" Click="Order_Click"
                     Margin="0"/>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="Console" Grid.Row="5" Grid.Column="1"/>
     </Grid>
 </Window>

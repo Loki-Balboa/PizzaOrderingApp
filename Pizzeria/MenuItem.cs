@@ -1,4 +1,7 @@
-﻿namespace Pizzeria
+﻿using System;
+using System.ComponentModel;
+
+namespace Pizzeria
 {
     public class MenuItem
     {

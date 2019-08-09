@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Pizzeria
 {
     public class Order
     {
-        public List<MenuItem> ItemsInBasket { get; set; }
+        public ObservableCollection<MenuItem> ItemsInBasket { get; set; }
         public float TotalPrize { get; set; }
         public int OrderNumber
         {
-            get { return pizzeria.Properties.Settings.Default.OrderNumber; }
+            get { return Pizzeria.Properties.Settings.Default.OrderNumber; }
             set
             {
-                pizzeria.Properties.Settings.Default.OrderNumber = value;
-                pizzeria.Properties.Settings.Default.Save();
+                Pizzeria.Properties.Settings.Default.OrderNumber = value;
+                Pizzeria.Properties.Settings.Default.Save();
             }
         }
         public Order()
         {
-            ItemsInBasket = new List<MenuItem>();
+            ItemsInBasket = new ObservableCollection<MenuItem>();
         }
         public void WriteToFile()
         {
