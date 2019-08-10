@@ -10,7 +10,6 @@ namespace Pizzeria
     public partial class OrderSummaryWindow : Window
     {
         readonly Order order;
-        public float TotalPrice { get; set; }
         public OrderSummaryWindow(Order order)
         {
             InitializeComponent();
@@ -28,7 +27,7 @@ namespace Pizzeria
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.order.WriteToFile();
             ClearOrder(mainWindow);
-            Hide();
+            Close();
         }
         private void ClearOrder(MainWindow mainWindow)
         {
