@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Pizzeria
 {
@@ -48,7 +47,6 @@ namespace Pizzeria
             if(BasketList.SelectedItem != null)
             {
                 order.ItemsInBasket.Remove((MenuItem)BasketList.SelectedItem);
-                BasketList.Items.Remove(BasketList.SelectedItem);
                 BasketList.UnselectAll();
                 if (order.ItemsInBasket.Count == 0)
                 {
@@ -79,31 +77,34 @@ namespace Pizzeria
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-            if (orderSummaryWindow == null)
-            {
-                orderSummaryWindow = new OrderSummaryWindow();
-                orderSummaryWindow.Owner = this;
-            }
-            orderSummaryWindow.GetOrder();
+            order.CalculateTotalPrize();
+            orderSummaryWindow = new OrderSummaryWindow(order);
+            orderSummaryWindow.Owner = this;
             Nullable<bool> orderResult = orderSummaryWindow.ShowDialog();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            App.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
-        private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            itemSummaryWindow = new ItemSummaryWindow();
-        }
+        //private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    itemSummaryWindow = new ItemSummaryWindow();
+        //    foreach(object row in PizzasInMenuList.Items)
+        //    {
+        //    }
+        //}
 
-        private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            System.Threading.Thread.Sleep(500);
-            itemSummaryWindow.Close();
-        }
+        //private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    if(!itemSummaryWindow.isMouseIn)
+        //    {
+        //        System.Threading.Thread.Sleep(500);
+        //        itemSummaryWindow.Close();
+        //    }
+        //}
         
     }
 }

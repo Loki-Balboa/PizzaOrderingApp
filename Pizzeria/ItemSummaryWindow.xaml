@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="ItemSummaryWindow" Height="450" Width="800"
         WindowStyle="None" SizeToContent="WidthAndHeight"
-        WindowStartupLocation="Manual">
+        WindowStartupLocation="Manual" Style="{StaticResource DarkWindowStyle}"
+        MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>

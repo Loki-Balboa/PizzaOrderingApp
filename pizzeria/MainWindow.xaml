@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
         Title="Pizza Ordering App" Height="300" Width="600" 
-        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Style="{StaticResource DarkWindowStyle}">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2.5,0,2.5,2.5"/>
@@ -49,15 +48,13 @@
                     SelectionChanged="PizzasInMenuList_SelectionChanged">
                 <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" 
-                                               MouseEnter="TextBlock_MouseEnter"
-                                               MouseLeave="TextBlock_MouseLeave"/>
+                            <GridViewColumn x:Name="PizzaNameLabel">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn> 
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn> 
                             <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>

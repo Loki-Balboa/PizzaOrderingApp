@@ -25,5 +25,13 @@ namespace Pizzeria
             MainWindow window = (MainWindow)Application.Current.MainWindow;
             return Application.Current.MainWindow.PointToScreen(Mouse.GetPosition(Application.Current.MainWindow));
         }
+        private void Window_MouseEnter(object sender, MouseEventArgs e)
+        {
+            isMouseIn = true;
+        }
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            isMouseIn = false;
+        }
     }
 }

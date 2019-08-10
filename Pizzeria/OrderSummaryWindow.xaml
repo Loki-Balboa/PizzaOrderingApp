@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
         Title="OrderSummary" Height="300" Width="200" 
-        WindowStyle="None" SizeToContent="WidthAndHeight"
+        WindowStyle="None" SizeToContent="WidthAndHeight" Style="{StaticResource DarkWindowStyle}"
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -43,7 +43,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        <TextBlock x:Name="TotalPrizeLabel" Grid.Row="3" Grid.Column="1"/>
+        <TextBlock x:Name="TotalPrizeLabel" Grid.Row="3" Grid.Column="1"
+                   Text="{Binding TotalPrice}"/>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
             <Button x:Name="ConfirmButton" Content="Confirm Order" 
                     Click="ConfirmButton_Click"/>

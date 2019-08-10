@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Choose Size" Height="auto" Width="auto"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource DarkWindowStyle}">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
