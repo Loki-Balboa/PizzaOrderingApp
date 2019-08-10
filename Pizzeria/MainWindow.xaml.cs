@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Pizzeria
 {
@@ -14,7 +15,7 @@ namespace Pizzeria
         private object currentSelection;
         private CreatePizzaWindow createPizzaWindow;
         private OrderSummaryWindow orderSummaryWindow;
-        private pizzeria.ItemSummaryWindow itemSummaryWindow;
+        private ItemSummaryWindow itemSummaryWindow;
 
         public MainWindow()
         {
@@ -95,12 +96,14 @@ namespace Pizzeria
 
         private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            itemSummaryWindow = new pizzeria.ItemSummaryWindow();
+            itemSummaryWindow = new ItemSummaryWindow();
         }
 
         private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            System.Threading.Thread.Sleep(500);
             itemSummaryWindow.Close();
         }
+        
     }
 }

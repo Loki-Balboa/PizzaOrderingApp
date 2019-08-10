@@ -1,9 +1,8 @@
-﻿using Pizzeria;
-using pizzeria;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 
-namespace pizzeria
+namespace Pizzeria
 {
     /// <summary>
     /// Interaction logic for ItemSummaryWindow.xaml
@@ -11,12 +10,20 @@ namespace pizzeria
     public partial class ItemSummaryWindow : Window
     {
         private List<Ingredient> ingredients;
+        public bool isMouseIn;
         public ItemSummaryWindow()
         {
             InitializeComponent();
-            //Top = System.
-            IngredientsList.ItemsSource = ingredients;
+            Point mouseCoord = GetMouseCoordinates();
+            Top = mouseCoord.Y;
+            Left = mouseCoord.X;
             Show();
+            IngredientsList.ItemsSource = ingredients;
+        }
+        private Point GetMouseCoordinates()
+        {
+            MainWindow window = (MainWindow)Application.Current.MainWindow;
+            return Application.Current.MainWindow.PointToScreen(Mouse.GetPosition(Application.Current.MainWindow));
         }
     }
 }
