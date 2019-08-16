@@ -90,6 +90,7 @@
     <Compile Include="ChooseSizeWindow.xaml.cs">
       <DependentUpon>ChooseSizeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ItemSummaryWindow.xaml.cs">
       <DependentUpon>ItemSummaryWindow.xaml</DependentUpon>
     </Compile>
