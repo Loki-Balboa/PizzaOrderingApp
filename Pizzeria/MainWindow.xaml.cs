@@ -11,10 +11,9 @@ namespace Pizzeria
     {
         public Order order = new Order();
         public Menu menu = new Menu();
-        private object currentSelection;
+        private object currentlySelectedItem;
         private CreatePizzaWindow createPizzaWindow;
         private OrderSummaryWindow orderSummaryWindow;
-        private ItemSummaryWindow itemSummaryWindow;
 
         public MainWindow()
         {
@@ -24,7 +23,7 @@ namespace Pizzeria
             BasketList.ItemsSource = order.ItemsInBasket;
         }
 
-        public void AddItem(MenuItem item)
+        public void AddItemToBasket(MenuItem item)
         {
             if (order.ItemsInBasket.Count == 0) EmptyLabel.Visibility = Visibility.Collapsed;
             order.ItemsInBasket.Add(item);
@@ -33,13 +32,18 @@ namespace Pizzeria
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(currentSelection != null)
+            if(currentlySelectedItem != null)
             {
-                MenuItem item = (MenuItem)currentSelection;
-                ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
-                chooseSizeWindow.Owner = this;
-                Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
+                ChooseSize(currentlySelectedItem);
             }
+        }
+
+        private void ChooseSize(object currentlySelectedItem)
+        {
+            MenuItem item = (MenuItem)currentlySelectedItem;
+            ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
+            chooseSizeWindow.Owner = this;
+            Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
         }
 
         private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
@@ -50,10 +54,15 @@ namespace Pizzeria
                 BasketList.UnselectAll();
                 if (order.ItemsInBasket.Count == 0)
                 {
-                    OrderPanel.Visibility = Visibility.Collapsed;
-                    EmptyLabel.Visibility = Visibility.Visible;
+                    HideBasket();
                 }
             }
+        }
+
+        private void HideBasket()
+        {
+            OrderPanel.Visibility = Visibility.Collapsed;
+            EmptyLabel.Visibility = Visibility.Visible;
         }
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
@@ -66,21 +75,35 @@ namespace Pizzeria
         private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             PizzasInMenuList.SelectedItems.Clear();
-            currentSelection = DrinksInMenuList.SelectedItem;
+            currentlySelectedItem = DrinksInMenuList.SelectedItem;
         }
 
         private void PizzasInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DrinksInMenuList.SelectedItems.Clear();
-            currentSelection = PizzasInMenuList.SelectedItem;
+            currentlySelectedItem = PizzasInMenuList.SelectedItem;
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-            order.CalculateTotalPrize();
-            orderSummaryWindow = new OrderSummaryWindow(order);
-            orderSummaryWindow.Owner = this;
-            Nullable<bool> orderResult = orderSummaryWindow.ShowDialog();
+            FillAdressForm();
+            if (order.Adress != null)
+            {
+                order.CalculateTotalPrize();
+                orderSummaryWindow = new OrderSummaryWindow(order);
+                orderSummaryWindow.Owner = this;
+                Nullable<bool> orderResult = orderSummaryWindow.ShowDialog();
+            }
+        }
+
+        private void FillAdressForm()
+        {
+            AdressWindow adressWindow = new AdressWindow();
+            adressWindow.Owner = this;
+            if(adressWindow.ShowDialog() == true)
+            {
+                order.Adress = adressWindow.Adress;
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)

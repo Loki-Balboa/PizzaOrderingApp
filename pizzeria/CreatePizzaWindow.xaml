@@ -69,8 +69,8 @@
                     Click="CancelButton_Click"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3">
-            <TextBlock Text="Prize:"/>
-            <TextBlock x:Name="CustomPizzaPrize"/>
+            <!--<TextBlock Text="Prize:"/>
+            <TextBlock x:Name="CustomPizzaPrice"/>-->
         </StackPanel>
     </Grid>
 </Window>

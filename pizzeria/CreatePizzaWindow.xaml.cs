@@ -33,7 +33,6 @@ namespace Pizzeria
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             selectedIngredients.Remove((Ingredient)SelectedIngredientsList.SelectedItem);
-            SelectedIngredientsList.Items.Remove(SelectedIngredientsList.SelectedItem);
             SelectedIngredientsList.UnselectAll();
             if (selectedIngredients.Count == 0) SelectedIngredientsPanel.Visibility = Visibility.Collapsed;
         }

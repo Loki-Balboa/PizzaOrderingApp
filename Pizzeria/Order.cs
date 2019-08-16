@@ -9,6 +9,7 @@ namespace Pizzeria
     {
         public ObservableCollection<MenuItem> ItemsInBasket { get; set; }
         public float TotalPrize { get; set; }
+        public Adress Adress { get; set; }
         public int OrderNumber
         {
             get { return Pizzeria.Properties.Settings.Default.OrderNumber; }
