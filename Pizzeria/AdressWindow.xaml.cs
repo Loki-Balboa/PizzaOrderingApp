@@ -9,14 +9,6 @@ namespace Pizzeria
     public partial class AdressWindow : Window
     {
         public Adress Adress { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Street { get; set; }
-        public string StreetPt2 { get; set; }
-        public string City { get; set; }
-        public string Zip { get; set; }
-        public string Email { get; set; }
-        public string PhoneNr { get; set; }
 
         public AdressWindow()
         {
@@ -34,7 +26,7 @@ namespace Pizzeria
             }
             else
             {
-                DialogResult = false;
+                DialogResult = null;
                 MessageBoxResult adressInvalid = MessageBox.Show("Adress is not complete", "Adress invalid");
             }
         }

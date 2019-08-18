@@ -12,11 +12,14 @@ namespace Pizzeria
             get => firstName;
             set
             {
-                if (ExtensionMethods.StringChecks.ContainsSpecialCharacters(value))
+                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                {
+                    firstName = value;
+                }
+                else
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Name contains special characters", "Invalid name");
                 }
-                else firstName = value;
             }
         }
         public string LastName
@@ -24,21 +27,114 @@ namespace Pizzeria
             get => lastName;
             set
             {
-                if (ExtensionMethods.StringChecks.ContainsSpecialCharacters(value))
+                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                {
+                    lastName = value;
+                }
+                else
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Name contains special characters", "Invalid name");
                 }
-                else lastName = value;
             }
         }
-        public string Street { get; set; }
-        public string StreetPt2 { get; set; }
-        public string City { get; set; }
-        public string Zip { get; set; }
-        public string Email { get; set; }
-        public string PhoneNr { get; set; }
+        public string Street
+        {
+            get => street;
+            set
+            {
+                if(ExtensionMethods.StringChecks.IsValidStreet(value))
+                {
+                    street = value;
+                }
+                else
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Street name is invalid ", "Invalid street");
+                }
+            }
+        }
+        public string StreetPt2
+        {
+            get => streetPt2;
+            set
+            {
+                if (ExtensionMethods.StringChecks.IsValidStreet(value))
+                {
+                    streetPt2 = value;
+                }
+                else
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Street name is invalid ", "Invalid street");
+                }
+            }
+        }
+        public string City
+        {
+            get => city;
+            set
+            {
+                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                {
+                    city = value;
+                }
+                else
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("City name is invalid", "Invalid city");
+                }
+            }
+        }
+        public string Zip
+        {
+            get => zip;
+            set
+            {
+                if(ExtensionMethods.StringChecks.IsValidZip(value))
+                {
+                    zip = value;
+                }
+                else
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Zip code is invalid", "Invalid zip code");
+                }
+            }
+        }
+        public string Email
+        {
+            get => email;
+            set
+            {
+                if (ExtensionMethods.StringChecks.IsValidEmail(value))
+                {
+                    email = value;
+                }
+                else
+                {
+                    MessageBoxResult invalidEmail = MessageBox.Show("Email adress is invalid", "Invalid email");
+                }
+            }
+        }
+        public string PhoneNr
+        {
+            get => phoneNr;
+            set
+            {
+                if (ExtensionMethods.StringChecks.IsValidPhoneNr(value))
+                {
+                    phoneNr = value;
+                }
+                else
+                {
+                    MessageBoxResult invalidPhoneNr = MessageBox.Show("Phone number is invalid", "Invalid phone number");
+                }
+            }
+        }
         private string firstName;
         private string lastName;
+        private string street;
+        private string streetPt2;
+        private string city;
+        private string zip;
+        private string email;
+        private string phoneNr;
 
         public bool IsComplete()
         {
