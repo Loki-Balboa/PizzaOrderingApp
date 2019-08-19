@@ -1,7 +1,6 @@
 ﻿<Application x:Class="Pizzeria.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Pizzeria"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="DarkWindowStyle" TargetType="Window">
@@ -11,10 +10,10 @@
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="2.5,0,2.5,0"/>
+            <Setter Property="Margin" Value="0,0,2.5,0"/>
         </Style>
         <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="2.5,0,2.5,0"/>
+            <Setter Property="Margin" Value="0,0,2.5,0"/>
         </Style>
     </Application.Resources>
 </Application>

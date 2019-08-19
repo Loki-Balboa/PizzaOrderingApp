@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="OrderSummary" Height="300" Width="200" 
+        Title="OrderSummary" Height="300" Width="250" 
         WindowStyle="None" SizeToContent="WidthAndHeight" Style="{StaticResource DarkWindowStyle}"
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
@@ -24,7 +25,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Order Summary"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Order" FontWeight="SemiBold"/>
         <ListView x:Name="OrderList" Grid.Row="2" Grid.Column="1">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
@@ -46,6 +47,35 @@
                     Click="ConfirmButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" 
                     Click="CancelButton_Click"/>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Delivery adress" FontWeight="SemiBold"/>
+        <StackPanel x:Name="AdressPanel" Grid.Row="2" Grid.Column="2"
+                    Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock Text="First name: "/>
+                <TextBlock Text="Last name: "/>
+                <TextBlock Text="Street: "/>
+                <TextBlock Text="Street Pt2: "/>
+                <TextBlock Text="City: "/>
+                <TextBlock Text="Zip code: "/>
+                <TextBlock Text="Phone: "/>
+                <TextBlock Text="Email adress"/>
+            </StackPanel>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="{Binding FirstName}"/>
+                <TextBlock Text="{Binding LastName}"/>
+                <TextBlock Text="{Binding Street}"/>
+                <TextBlock Text="{Binding StreetPt2}"/>
+                <TextBlock Text="{Binding City}"/>
+                <TextBlock Text="{Binding Zip}"/>
+                <TextBlock Text="{Binding PhoneNr}"/>
+                <TextBlock Text="{Binding Email}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

@@ -14,23 +14,33 @@ namespace Pizzeria
         private StreamWriter orderFile;
         private int OrderNumber
         {
-            get { return Pizzeria.Properties.Settings.Default.OrderNumber; }
+            get => Properties.Settings.Default.OrderNumber; 
             set
             {
-                Pizzeria.Properties.Settings.Default.OrderNumber = value;
-                Pizzeria.Properties.Settings.Default.Save();
+                Properties.Settings.Default.OrderNumber = value;
+                Properties.Settings.Default.Save();
             }
         }
+
         public Order()
         {
             ItemsInBasket = new ObservableCollection<MenuItem>();
         }
+
+        public void CalculateTotalPrize()
+        {
+            TotalPrize = 0;
+            foreach (MenuItem item in ItemsInBasket)
+            {
+                TotalPrize += item.CurrentPrice;
+            }
+        }
+
         public void WriteToFile()
         {
             string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
             orderFile = File.CreateText(currentPath + String.Format(@"\data\orders\order#{0}.txt", OrderNumber));
-            orderFile.WriteLine(String.Format("Order#{0}:", OrderNumber));
-            orderFile.WriteLine(DateTime.Now.ToString());
+            WriteTitleAndDate();
             WriteOrder();
             WriteAdress();
             orderFile.Close();
@@ -65,13 +75,10 @@ namespace Pizzeria
             }
         }
 
-        public void CalculateTotalPrize()
+        private void WriteTitleAndDate()
         {
-            TotalPrize = 0;
-            foreach (MenuItem item in ItemsInBasket)
-            {
-                TotalPrize += item.CurrentPrice;
-            }
+            orderFile.WriteLine(String.Format("Order#{0}:", OrderNumber));
+            orderFile.WriteLine(DateTime.Now.ToString());
         }
     }
 }

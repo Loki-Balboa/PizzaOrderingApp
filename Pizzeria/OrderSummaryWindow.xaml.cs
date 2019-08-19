@@ -15,6 +15,7 @@ namespace Pizzeria
             InitializeComponent();
             this.order = order;
             OrderList.ItemsSource = order.ItemsInBasket;
+            AdressPanel.DataContext = order.Adress;
             ChangeTotalPrizeText(order.TotalPrize);
         }
         private void ChangeTotalPrizeText(float price)

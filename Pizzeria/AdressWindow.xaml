@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Adress" Height="300" Width="200" 
+        Title="Adress" Height="300" Width="250" 
         SizeToContent="WidthAndHeight" Style="{StaticResource DarkWindowStyle}"
         WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,0,2.5,0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="0,0,2.5,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -24,6 +35,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -45,9 +58,9 @@
         <TextBlock Grid.Row="7" Grid.Column="2" Text="eMail"/>
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding PhoneNr}"/>
         <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Email}"/>
-        <Button x:Name="ConfirmButton" Grid.Row="9" Grid.Column="1" Content="Confirm adress"
-                Click="ConfirmButton_Click"/>
-        <Button x:Name="CancelButton" Grid.Row="9" Grid.Column="2" Content="Cancel"
-                Click="CancelButton_Click"/>
+        <Button x:Name="ConfirmButton" Grid.Row="9" Grid.Column="1"
+                HorizontalAlignment="Left" Content="Confirm adress" Click="ConfirmButton_Click"/>
+        <Button x:Name="CancelButton" Grid.Row="9" Grid.Column="2" 
+                HorizontalAlignment="Left" Content="Cancel" Click="CancelButton_Click"/>
     </Grid>
 </Window>
