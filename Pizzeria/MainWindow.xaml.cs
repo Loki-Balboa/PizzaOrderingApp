@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows.Media;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Pizzeria
 {
@@ -14,6 +16,7 @@ namespace Pizzeria
         private object currentlySelectedItem;
         private CreatePizzaWindow createPizzaWindow;
         private OrderSummaryWindow orderSummaryWindow;
+        private ItemSummaryWindow ItemSummaryWindow;
 
         public MainWindow()
         {
@@ -112,22 +115,37 @@ namespace Pizzeria
             Application.Current.Shutdown();
         }
 
-        //private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        //{
-        //    itemSummaryWindow = new ItemSummaryWindow();
-        //    foreach(object row in PizzasInMenuList.Items)
-        //    {
-        //    }
-        //}
+        private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (ItemSummaryWindow != null) ItemSummaryWindow.Close();
 
-        //private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        //{
-        //    if(!itemSummaryWindow.isMouseIn)
-        //    {
-        //        System.Threading.Thread.Sleep(500);
-        //        itemSummaryWindow.Close();
-        //    }
-        //}
-        
+            Point point = e.GetPosition(this);
+            HitTestResult result = VisualTreeHelper.HitTest(this, point);
+            MatchHitResultToPizza(result);
+        }
+
+        private void MatchHitResultToPizza(HitTestResult result)
+        {
+            DependencyObject obj = result.VisualHit;
+            TextBlock textBlock = obj as TextBlock;
+            foreach (Pizza pizza in menu.Pizzas)
+            {
+                if (pizza.Name == textBlock.Text)
+                {
+                    ItemSummaryWindow = new ItemSummaryWindow(pizza.Ingredients);
+                    break;
+                }
+            }
+        }
+
+        private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if(ItemSummaryWindow != null)
+            {
+                System.Threading.Thread.Sleep(1000);
+                ItemSummaryWindow.Close();
+            }
+        }
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using ExtensionMethods;
-using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace Pizzeria
@@ -12,7 +11,7 @@ namespace Pizzeria
             get => firstName;
             set
             {
-                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                if (StringChecks.ContainsOnlyLetters(value))
                 {
                     firstName = value;
                 }
@@ -27,7 +26,7 @@ namespace Pizzeria
             get => lastName;
             set
             {
-                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                if (StringChecks.ContainsOnlyLetters(value))
                 {
                     lastName = value;
                 }
@@ -42,7 +41,7 @@ namespace Pizzeria
             get => street;
             set
             {
-                if(ExtensionMethods.StringChecks.IsValidStreet(value))
+                if(StringChecks.IsValidStreet(value))
                 {
                     street = value;
                 }
@@ -57,7 +56,7 @@ namespace Pizzeria
             get => streetPt2;
             set
             {
-                if (ExtensionMethods.StringChecks.IsValidStreet(value))
+                if (StringChecks.IsValidStreet(value))
                 {
                     streetPt2 = value;
                 }
@@ -72,7 +71,7 @@ namespace Pizzeria
             get => city;
             set
             {
-                if (ExtensionMethods.StringChecks.ContainsOnlyLetters(value))
+                if (StringChecks.ContainsOnlyLetters(value))
                 {
                     city = value;
                 }
@@ -87,7 +86,7 @@ namespace Pizzeria
             get => zip;
             set
             {
-                if(ExtensionMethods.StringChecks.IsValidZip(value))
+                if(StringChecks.IsValidZip(value))
                 {
                     zip = value;
                 }
@@ -102,7 +101,7 @@ namespace Pizzeria
             get => email;
             set
             {
-                if (ExtensionMethods.StringChecks.IsValidEmail(value))
+                if (StringChecks.IsValidEmail(value))
                 {
                     email = value;
                 }
@@ -117,7 +116,7 @@ namespace Pizzeria
             get => phoneNr;
             set
             {
-                if (ExtensionMethods.StringChecks.IsValidPhoneNr(value))
+                if (StringChecks.IsValidPhoneNr(value))
                 {
                     phoneNr = value;
                 }

@@ -11,9 +11,10 @@ namespace Pizzeria
     {
         private List<Ingredient> ingredients;
         public bool isMouseIn;
-        public ItemSummaryWindow()
+        public ItemSummaryWindow(List<Ingredient> ingredients)
         {
             InitializeComponent();
+            this.ingredients = ingredients;
             Point mouseCoord = GetMouseCoordinates();
             Top = mouseCoord.Y;
             Left = mouseCoord.X;

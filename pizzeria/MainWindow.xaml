@@ -51,8 +51,9 @@
                             <GridViewColumn x:Name="PizzaNameLabel">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
+                                        <TextBlock Text="{Binding Name}" MouseEnter="TextBlock_MouseEnter"
+                                               MouseLeave="TextBlock_MouseLeave"/>
+                                    </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn> 
                             <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>

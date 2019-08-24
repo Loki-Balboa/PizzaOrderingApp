@@ -78,7 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Admin.cs" />
     <Compile Include="Adress.cs" />
     <Compile Include="AdressWindow.xaml.cs">
       <DependentUpon>AdressWindow.xaml</DependentUpon>

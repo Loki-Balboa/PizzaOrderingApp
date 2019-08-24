@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
-        Title="ItemSummaryWindow" Height="450" Width="800"
+        Title="ItemSummaryWindow" Height="200" Width="100"
         WindowStyle="None" SizeToContent="WidthAndHeight"
         WindowStartupLocation="Manual" Style="{StaticResource DarkWindowStyle}"
         MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
@@ -17,11 +16,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="NameLabel" Grid.Row="1" Text="ItemSummary"/>
+        <TextBlock x:Name="NameLabel" Grid.Row="1" Text="Ingredients:"/>
         <ListView x:Name="IngredientsList" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Ingredient}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
