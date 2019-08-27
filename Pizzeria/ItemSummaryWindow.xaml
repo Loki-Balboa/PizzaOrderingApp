@@ -7,7 +7,17 @@
         Title="ItemSummaryWindow" Height="200" Width="100"
         WindowStyle="None" SizeToContent="WidthAndHeight"
         WindowStartupLocation="Manual" Style="{StaticResource DarkWindowStyle}"
-        MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
+        MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave"
+        AllowsTransparency="True">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:05" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>

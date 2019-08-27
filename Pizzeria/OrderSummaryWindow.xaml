@@ -27,6 +27,11 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Order" FontWeight="SemiBold"/>
         <ListView x:Name="OrderList" Grid.Row="2" Grid.Column="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
                     <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
