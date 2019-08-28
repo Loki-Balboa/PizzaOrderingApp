@@ -11,7 +11,7 @@ namespace Pizzeria
             get => firstName;
             set
             {
-                if (StringChecks.ContainsOnlyLetters(value))
+                if (value.ContainsOnlyLetters())
                 {
                     firstName = value;
                 }
@@ -26,7 +26,7 @@ namespace Pizzeria
             get => lastName;
             set
             {
-                if (StringChecks.ContainsOnlyLetters(value))
+                if (value.ContainsOnlyLetters())
                 {
                     lastName = value;
                 }
@@ -41,7 +41,7 @@ namespace Pizzeria
             get => street;
             set
             {
-                if(StringChecks.IsValidStreet(value))
+                if(value.IsValidStreet())
                 {
                     street = value;
                 }
@@ -56,7 +56,7 @@ namespace Pizzeria
             get => streetPt2;
             set
             {
-                if (StringChecks.IsValidStreet(value))
+                if (value.IsValidStreet())
                 {
                     streetPt2 = value;
                 }
@@ -71,7 +71,7 @@ namespace Pizzeria
             get => city;
             set
             {
-                if (StringChecks.ContainsOnlyLetters(value))
+                if (value.ContainsOnlyLetters())
                 {
                     city = value;
                 }
@@ -86,7 +86,7 @@ namespace Pizzeria
             get => zip;
             set
             {
-                if(StringChecks.IsValidZip(value))
+                if(value.IsValidZip())
                 {
                     zip = value;
                 }
@@ -101,7 +101,7 @@ namespace Pizzeria
             get => email;
             set
             {
-                if (StringChecks.IsValidEmail(value))
+                if (value.IsValidEmail())
                 {
                     email = value;
                 }
@@ -116,7 +116,7 @@ namespace Pizzeria
             get => phoneNr;
             set
             {
-                if (StringChecks.IsValidPhoneNr(value))
+                if (value.IsValidPhoneNr())
                 {
                     phoneNr = value;
                 }

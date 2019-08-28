@@ -103,7 +103,7 @@ namespace Pizzeria
         {
             AdressWindow adressWindow = new AdressWindow();
             adressWindow.Owner = this;
-            if(adressWindow.ShowDialog() == true)
+                if(adressWindow.ShowDialog() == true)
             {
                 order.Adress = adressWindow.Adress;
             }
@@ -111,6 +111,7 @@ namespace Pizzeria
 
         private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            //  TODO: Rewrite MouseNotMoves function so it returns true when mouse coordinates doesn't change for x time  
             //if (MouseNotMoves(1000))
             //{
                 ShowItemSummary();
@@ -138,13 +139,14 @@ namespace Pizzeria
 
         private bool MouseNotMoves(int time)
         {
-            Point currentMouseCoord = System.Windows.Input.Mouse.GetPosition(this);
+            Point currentMouseCoord = PointToScreen(System.Windows.Input.Mouse.GetPosition(this));
             TimeSpan timeSpan = new TimeSpan(0,0,0,0,0);
             DateTime start = DateTime.Now;
             while (timeSpan.TotalMilliseconds <= time)
             {
+                System.Threading.Thread.Sleep(100);
                 timeSpan = DateTime.Now - start;
-                Point newMouseCoord = System.Windows.Input.Mouse.GetPosition(this);
+                Point newMouseCoord = PointToScreen(System.Windows.Input.Mouse.GetPosition(this));
                 if (currentMouseCoord != newMouseCoord) start = DateTime.Now;
                 currentMouseCoord = newMouseCoord;
             }
