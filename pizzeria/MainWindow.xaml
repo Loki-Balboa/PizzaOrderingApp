@@ -47,7 +47,7 @@
                     Width="auto" HorizontalContentAlignment="Stretch" 
                     SelectionChanged="PizzasInMenuList_SelectionChanged">
                 <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                        <GridView>
                             <GridViewColumn x:Name="PizzaNameLabel">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -56,7 +56,9 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn> 
-                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>
+                            <GridViewColumn Header="Small" Width="auto" DisplayMemberBinding="{Binding PrizeSmall}"/>
+                            <GridViewColumn Header="Medium" Width="auto" DisplayMemberBinding="{Binding PrizeMedium}"/>
+                            <GridViewColumn Header="Large" Width="auto" DisplayMemberBinding="{Binding PrizeLarge}"/>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -68,12 +70,20 @@
                     </ListView.View>
             </ListView>
             <TextBlock Text="Drinks"/>
-            <ListView x:Name="DrinksInMenuList"  
-                    Width="auto" HorizontalContentAlignment="Stretch" SelectionChanged="DrinksInMenuList_SelectionChanged">
+            <ListView x:Name="DrinksInMenuList" Width="auto" 
+                       SelectionChanged="DrinksInMenuList_SelectionChanged">
                 <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
                         <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding BasePrice}"/>
+                        <GridViewColumn Header="Small" Width="auto" DisplayMemberBinding="{Binding PrizeSmall}"/>
+                        <GridViewColumn Header="Medium" Width="auto" DisplayMemberBinding="{Binding PrizeMedium}"/>
+                        <GridViewColumn Header="Large"  Width="auto" DisplayMemberBinding="{Binding PrizeLarge}"/>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
