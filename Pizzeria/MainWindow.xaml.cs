@@ -3,6 +3,9 @@ using System.Windows.Media;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace Pizzeria
 {
@@ -13,10 +16,10 @@ namespace Pizzeria
     {
         public Order order = new Order();
         public Menu menu = new Menu();
-        private object CurrentlySelectedItem;
-        private CreatePizzaWindow CreatePizzaWindow;
-        private OrderSummaryWindow OrderSummaryWindow;
-        private ItemSummaryWindow ItemSummaryWindow;
+        private object currentlySelectedItem;
+        private CreatePizzaWindow createPizzaWindow;
+        private OrderSummaryWindow orderSummaryWindow;
+        private ItemSummaryWindow itemSummaryWindow;
 
         public MainWindow()
         {
@@ -35,9 +38,9 @@ namespace Pizzeria
 
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
-            if(CurrentlySelectedItem != null)
+            if(currentlySelectedItem != null)
             {
-                ChooseSize(CurrentlySelectedItem);
+                ChooseSize(currentlySelectedItem);
             }
         }
 
@@ -46,7 +49,7 @@ namespace Pizzeria
             MenuItem item = (MenuItem)currentlySelectedItem;
             ChooseSizeWindow chooseSizeWindow = new ChooseSizeWindow(new MenuItem(item.Name, item.BasePrice));
             chooseSizeWindow.Owner = this;
-            Nullable<bool> chooseResult = chooseSizeWindow.ShowDialog();
+            bool? chooseResult = chooseSizeWindow.ShowDialog();
         }
 
         private void RemoveFromBasket_Click(object sender, RoutedEventArgs e)
@@ -55,11 +58,8 @@ namespace Pizzeria
             {
                 order.ItemsInBasket.Remove((MenuItem)BasketList.SelectedItem);
                 BasketList.UnselectAll();
-                if (order.ItemsInBasket.Count == 0)
-                {
-                    HideBasket();
-                }
             }
+            if (order.ItemsInBasket.Count == 0) HideBasket();
         }
 
         private void HideBasket()
@@ -70,21 +70,21 @@ namespace Pizzeria
 
         private void CreateCustomPizza_Click(object sender, RoutedEventArgs e)
         {  
-            CreatePizzaWindow = new CreatePizzaWindow();
-            CreatePizzaWindow.Owner = this;
-            Nullable<bool> createPizzaResult = CreatePizzaWindow.ShowDialog();
+            createPizzaWindow = new CreatePizzaWindow();
+            createPizzaWindow.Owner = this;
+            bool? createPizzaResult = createPizzaWindow.ShowDialog();
         }
 
-        private void DrinksInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void DrinksInMenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PizzasInMenuList.SelectedItems.Clear();
-            CurrentlySelectedItem = DrinksInMenuList.SelectedItem;
+            currentlySelectedItem = DrinksInMenuList.SelectedItem;
         }
 
-        private void PizzasInMenuList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void PizzasInMenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DrinksInMenuList.SelectedItems.Clear();
-            CurrentlySelectedItem = PizzasInMenuList.SelectedItem;
+            currentlySelectedItem = PizzasInMenuList.SelectedItem;
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
@@ -93,9 +93,9 @@ namespace Pizzeria
             if (order.Adress != null)
             {
                 order.CalculateTotalPrize();
-                OrderSummaryWindow = new OrderSummaryWindow(order);
-                OrderSummaryWindow.Owner = this;
-                Nullable<bool> orderResult = OrderSummaryWindow.ShowDialog();
+                orderSummaryWindow = new OrderSummaryWindow(order);
+                orderSummaryWindow.Owner = this;
+                bool? orderResult = orderSummaryWindow.ShowDialog();
             }
         }
 
@@ -109,48 +109,22 @@ namespace Pizzeria
             }
         }
 
-        private void TextBlock_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
         {
-            //  TODO: Rewrite MouseNotMoves function so it returns true when mouse coordinates doesn't change for x time  
-            //if (MouseNotMoves(1000))
-            //{
-                ShowItemSummary();
-            //}
+            //  TODO: Check if mouse not moves for given time before showing item summary
+            ShowItemSummary();
         }
 
         private void ShowItemSummary()
         {
-            Point point = System.Windows.Input.Mouse.GetPosition(this);
+            Point point = Mouse.GetPosition(this);
             HitTestResult result = VisualTreeHelper.HitTest(this, point);
             Pizza pizza = MatchHitResultToPizza(result);
-            if (ItemSummaryWindow != null)
+            if(itemSummaryWindow == null ||
+                (itemSummaryWindow!=null && pizza.Name != itemSummaryWindow.ItemName))
             {
-                ItemSummaryWindow.Close();
-                if (pizza.Name != ItemSummaryWindow.Name)
-                {
-                    ItemSummaryWindow = new ItemSummaryWindow(pizza.Name, pizza.Ingredients);
-                }
+                itemSummaryWindow = new ItemSummaryWindow(pizza.Name, pizza.Ingredients);
             }
-            else
-            {
-                ItemSummaryWindow = new ItemSummaryWindow(pizza.Name, pizza.Ingredients);
-            }
-        }
-
-        private bool MouseNotMoves(int time)
-        {
-            Point currentMouseCoord = PointToScreen(System.Windows.Input.Mouse.GetPosition(this));
-            TimeSpan timeSpan = new TimeSpan(0,0,0,0,0);
-            DateTime start = DateTime.Now;
-            while (timeSpan.TotalMilliseconds <= time)
-            {
-                System.Threading.Thread.Sleep(100);
-                timeSpan = DateTime.Now - start;
-                Point newMouseCoord = PointToScreen(System.Windows.Input.Mouse.GetPosition(this));
-                if (currentMouseCoord != newMouseCoord) start = DateTime.Now;
-                currentMouseCoord = newMouseCoord;
-            }
-            return true;
         }
 
         private Pizza MatchHitResultToPizza(HitTestResult result)
@@ -169,11 +143,11 @@ namespace Pizzeria
 
         private void TextBlock_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if(ItemSummaryWindow != null && !ItemSummaryWindow.IsMouseOver)
+            if(itemSummaryWindow != null && !itemSummaryWindow.IsMouseOver)
             {
                 System.Threading.Thread.Sleep(1000);
-                ItemSummaryWindow.Name = null;
-                ItemSummaryWindow.Close();
+                itemSummaryWindow.ItemName = null;
+                itemSummaryWindow.Close();
             }
         }
 

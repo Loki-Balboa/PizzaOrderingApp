@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,13 +10,14 @@ namespace Pizzeria
     /// </summary>
     public partial class ItemSummaryWindow : Window
     {
-        public string Name { get; set; }
-        private List<Ingredient> ingredients;
+        //TODO: Fade out window
+        public string ItemName { get; set; }
+        private readonly List<Ingredient> ingredients;
         public bool IsMouseIn { get; set; }
         public ItemSummaryWindow(string name ,List<Ingredient> ingredients)
         {
             InitializeComponent();
-            this.Name = name;
+            this.ItemName = name;
             this.ingredients = ingredients;
             SetWindowOrigin();
             IngredientsList.ItemsSource = ingredients;
@@ -45,6 +45,10 @@ namespace Pizzeria
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
             IsMouseIn = false;
+        }
+
+        private void FadeIn_Completed(object sender, EventArgs e)
+        {
         }
     }
 }

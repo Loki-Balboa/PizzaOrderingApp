@@ -9,11 +9,18 @@
         WindowStartupLocation="Manual" Style="{StaticResource DarkWindowStyle}"
         MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave"
         AllowsTransparency="True">
+    <Window.Resources>
+        <Storyboard x:Key="FadeOut">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="1" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+    </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
+        <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
-                <Storyboard Duration="00:00:05" Storyboard.TargetProperty="Opacity">
-                    <DoubleAnimation From="0" To="1"/>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0" To="1" Duration="0:0:0.5" Completed="FadeIn_Completed"/>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>

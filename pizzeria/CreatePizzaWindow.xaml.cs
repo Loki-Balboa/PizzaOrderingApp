@@ -10,6 +10,7 @@ namespace Pizzeria
     /// </summary>
     public partial class CreatePizzaWindow : Window
     {
+        //TODO: Show prices for eache size, ingredients should cost the same
         private Menu menu = new Menu();
         private ObservableCollection<Ingredient> selectedIngredients = new ObservableCollection<Ingredient>();
 
