@@ -18,21 +18,21 @@ namespace Pizzeria
         private void SmallSizeButton_Click(object sender, RoutedEventArgs e)
         {
             Item.SetSize(MenuItem.Size.Small);
-            mainWindow.AddItem(Item);
+            mainWindow.AddItemToBasket(Item);
             Close();
         }
 
         private void MediumSizeButton_Click(object sender, RoutedEventArgs e)
         {
             Item.SetSize(MenuItem.Size.Medium);
-            mainWindow.AddItem(Item);
+            mainWindow.AddItemToBasket(Item);
             Close();
         }
 
         private void LargeSizeButton_Click(object sender, RoutedEventArgs e)
         {
             Item.SetSize(MenuItem.Size.Large);
-            mainWindow.AddItem(Item);
+            mainWindow.AddItemToBasket(Item);
             Close();
         }
     }

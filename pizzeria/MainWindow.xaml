@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Pizzeria"
         mc:Ignorable="d"
-        Title="Pizza Ordering App" Height="300" Width="600" 
-        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Pizza Ordering App" Height="300" Width="400" 
+        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Style="{StaticResource DarkWindowStyle}">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2.5,0,2.5,2.5"/>
@@ -45,43 +44,56 @@
             <TextBlock Text="Menu"/>
             <TextBlock Text="Pizzas"/>
             <ListView x:Name="PizzasInMenuList"  
-                    Width="auto" HorizontalContentAlignment="Stretch" SelectionChanged="PizzasInMenuList_SelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
-                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
-                            <TextBlock Grid.Column="2" Text="PLN"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                    Width="auto" HorizontalContentAlignment="Stretch" 
+                    SelectionChanged="PizzasInMenuList_SelectionChanged">
+                <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="PizzaNameLabel">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" MouseEnter="TextBlock_MouseEnter"
+                                               MouseLeave="TextBlock_MouseLeave"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn> 
+                            <GridViewColumn Header="Small" Width="auto" DisplayMemberBinding="{Binding PrizeSmall}"/>
+                            <GridViewColumn Header="Medium" Width="auto" DisplayMemberBinding="{Binding PrizeMedium}"/>
+                            <GridViewColumn Header="Large" Width="auto" DisplayMemberBinding="{Binding PrizeLarge}"/>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="PLN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
             </ListView>
             <TextBlock Text="Drinks"/>
-            <ListView x:Name="DrinksInMenuList"  
-                    Width="auto" HorizontalContentAlignment="Stretch" SelectionChanged="DrinksInMenuList_SelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding BasePrice}" 
-                                       HorizontalAlignment="Right" Margin="5,0,2,0"/>
-                            <TextBlock Grid.Column="2" Text="PLN"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView x:Name="DrinksInMenuList" Width="auto" 
+                       SelectionChanged="DrinksInMenuList_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Small" Width="auto" DisplayMemberBinding="{Binding PrizeSmall}"/>
+                        <GridViewColumn Header="Medium" Width="auto" DisplayMemberBinding="{Binding PrizeMedium}"/>
+                        <GridViewColumn Header="Large"  Width="auto" DisplayMemberBinding="{Binding PrizeLarge}"/>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="PLN"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
-
         </StackPanel>
         <StackPanel x:Name="BasketPanel" Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" 
                     Margin="2.5,0,2.5,0" Width="auto">
@@ -89,26 +101,23 @@
             <TextBlock x:Name="EmptyLabel" Text="Empty"/>
             <StackPanel x:Name="OrderPanel" Visibility="Collapsed">
                 <ListView x:Name="BasketList" HorizontalContentAlignment="Stretch">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="20"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Name}"/>
-                                <TextBlock Grid.Column="1" Text="{Binding CurrentPrice}" 
-                                           HorizontalAlignment="Right" Margin="0,0,2,0"/>
-                                <TextBlock Grid.Column="2" Text="PLN"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderHidden}">
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding CurrentPrice}"/>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="PLN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
                 </ListView>
                 <Button x:Name="Order" Content="Order" Click="Order_Click"
                     Margin="0"/>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="Console" Grid.Row="5" Grid.Column="1"/>
     </Grid>
 </Window>

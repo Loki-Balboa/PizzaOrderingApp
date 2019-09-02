@@ -5,6 +5,9 @@
         public string Name { get; set; }
         public float BasePrice { get; set; }
         public float CurrentPrice { get; set; }
+        public float PrizeSmall { get => BasePrice * 0.75f; }
+        public float PrizeMedium { get => BasePrice; }
+        public float PrizeLarge { get => BasePrice * 1.25f; }
         public enum Size { Small, Medium, Large }
         public MenuItem(string name)
         {
@@ -21,17 +24,17 @@
             {
                 case Size.Small:
                     {
-                        CurrentPrice = 0.75f * BasePrice;
+                        CurrentPrice = PrizeSmall;
                         break;
                     }
                 case Size.Medium:
                     {
-                        CurrentPrice = BasePrice;
+                        CurrentPrice = PrizeMedium;
                         break;
                     }
                 case Size.Large:
                     {
-                        CurrentPrice = 1.25f * BasePrice;
+                        CurrentPrice = PrizeLarge;
                         break;
                     }
             }

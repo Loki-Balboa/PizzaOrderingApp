@@ -1,41 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 
 namespace Pizzeria
 {
     public class Order
     {
-        public List<MenuItem> ItemsInBasket { get; set; }
+        public ObservableCollection<MenuItem> ItemsInBasket { get; set; }
         public float TotalPrize { get; set; }
-        public int OrderNumber
+        public Adress Adress { get; set; }
+        private StreamWriter orderFile;
+        private int OrderNumber
         {
-            get { return pizzeria.Properties.Settings.Default.OrderNumber; }
+            get => Properties.Settings.Default.OrderNumber; 
             set
             {
-                pizzeria.Properties.Settings.Default.OrderNumber = value;
-                pizzeria.Properties.Settings.Default.Save();
+                Properties.Settings.Default.OrderNumber = value;
+                Properties.Settings.Default.Save();
             }
         }
+
         public Order()
         {
-            ItemsInBasket = new List<MenuItem>();
+            ItemsInBasket = new ObservableCollection<MenuItem>();
         }
-        public void WriteToFile()
-        {
-            string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
-            StreamWriter orderFile = File.CreateText(currentPath + String.Format(@"\data\orders\order#{0}.txt", OrderNumber));
-            orderFile.WriteLine(String.Format("Order#{0}:", OrderNumber));
-            orderFile.WriteLine(DateTime.Now.ToString());
 
-            foreach (MenuItem item in ItemsInBasket)
-            {
-                orderFile.WriteLine(String.Format("{0} {1} PLN",item.Name, item.BasePrice));
-            }
-            orderFile.WriteLine(String.Format("Sum:{0} PLN", TotalPrize));
-            orderFile.Close();
-            OrderNumber += 1;
-        }
         public void CalculateTotalPrize()
         {
             TotalPrize = 0;
@@ -43,6 +34,51 @@ namespace Pizzeria
             {
                 TotalPrize += item.CurrentPrice;
             }
+        }
+
+        public void WriteToFile()
+        {
+            string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
+            orderFile = File.CreateText(currentPath + String.Format(@"\data\orders\order#{0}.txt", OrderNumber));
+            WriteTitleAndDate();
+            WriteOrder();
+            WriteAdress();
+            orderFile.Close();
+            OrderNumber += 1;
+        }
+
+        private void WriteOrder()
+        {
+            foreach (MenuItem item in ItemsInBasket)
+            {
+                orderFile.WriteLine(String.Format("{0} {1} PLN", item.Name, item.BasePrice));
+            }
+
+            orderFile.WriteLine(String.Format("Sum:{0} PLN", TotalPrize));
+        }
+
+        private void WriteAdress()
+        {
+            orderFile.WriteLine("Delivery adress:");
+            foreach (PropertyInfo propInfo in Adress.GetType().GetProperties())
+            {
+                orderFile.Write(String.Format("{0}: ", propInfo.Name));
+                try
+                {
+                    string propValue = propInfo.GetValue(Adress).ToString();
+                    orderFile.Write(String.Format("{0}\n", propValue));
+                }
+                catch (NullReferenceException)
+                {
+                    orderFile.Write("\n");
+                }
+            }
+        }
+
+        private void WriteTitleAndDate()
+        {
+            orderFile.WriteLine(String.Format("Order#{0}:", OrderNumber));
+            orderFile.WriteLine(DateTime.Now.ToString());
         }
     }
 }
