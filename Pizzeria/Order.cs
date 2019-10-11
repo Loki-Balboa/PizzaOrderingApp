@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
@@ -39,6 +38,7 @@ namespace Pizzeria
         public void WriteToFile()
         {
             string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
+            Directory.CreateDirectory(currentPath + @"\data\orders");
             orderFile = File.CreateText(currentPath + String.Format(@"\data\orders\order#{0}.txt", OrderNumber));
             WriteTitleAndDate();
             WriteOrder();

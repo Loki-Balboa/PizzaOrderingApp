@@ -20,10 +20,17 @@ namespace Pizzeria
 
         private void ReadFromFile()
         {
-            string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
-            ReadIngredients(currentPath);
-            ReadPizzas(currentPath);
-            ReadDrinks(currentPath);
+            try
+            {
+                string currentPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"));
+                ReadIngredients(currentPath);
+                ReadPizzas(currentPath);
+                ReadDrinks(currentPath);
+            }
+            catch (Exception)
+            {
+                throw new NullReferenceException("One or more of the menu files are missing");
+            }
         }
 
         private void ReadIngredients(string currentPath)
